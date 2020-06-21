@@ -18,7 +18,7 @@ public class LruCache<K, V> implements Cache<K, V> {
     private final int maxSize;
 
     public LruCache(int maxSize) {
-        this.map = new LinkedHashMap<K, V>((int) (maxSize / 0.75) + 1, 0.75f, true);
+        this.map = new LinkedHashMap<K, V>(16, 0.75f, true);
         this.maxSize = maxSize;
     }
 

@@ -1,5 +1,6 @@
 package com.lzp.cacheclient;
 
+import com.lzp.protocol.CommandDTO;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -46,46 +47,46 @@ public class CacheClient implements AutoCloseable {
 
 
     public synchronized Object get(Object key) {
-        channel.writeAndFlush(new CommandDTO("get",key,null));
         Map<String,Object> map = ClientHandler.channelObjectMap.get(this.channel);
         map.put("get",Thread.currentThread());
+        channel.writeAndFlush(new CommandDTO("get",key,null).toBytes());
         LockSupport.park();
         return map.get("get");
     }
 
     public synchronized Object put(Object key, Object value) {
-        channel.writeAndFlush(new CommandDTO("put",key,value));
-        Map<String,Object> map = ClientHandler.channelObjectMap.get(this.channel);
-        map.put("put",Thread.currentThread());
+        Map<String, Object> map = ClientHandler.channelObjectMap.get(this.channel);
+        map.put("put", Thread.currentThread());
+        channel.writeAndFlush(new CommandDTO("put", key, value).toBytes());
         LockSupport.park();
         return map.get("put");
     }
 
 
-
     public synchronized Object remove(Object key) {
-        channel.writeAndFlush(new CommandDTO("remove",key,null));
-        Map<String,Object> map = ClientHandler.channelObjectMap.get(this.channel);
-        map.put("remove",Thread.currentThread());
+        Map<String, Object> map = ClientHandler.channelObjectMap.get(this.channel);
+        map.put("remove", Thread.currentThread());
+        channel.writeAndFlush(new CommandDTO("remove", key, null).toBytes());
+
         LockSupport.park();
         return map.get("remove");
     }
 
 
-
     public synchronized int getMaxMemorySize() {
-        channel.writeAndFlush(new CommandDTO("getMaxMemorySize",null,null));
-        Map<String,Object> map = ClientHandler.channelObjectMap.get(this.channel);
-        map.put("getMaxMemorySize",Thread.currentThread());
+        Map<String, Object> map = ClientHandler.channelObjectMap.get(this.channel);
+        map.put("getMaxMemorySize", Thread.currentThread());
+        channel.writeAndFlush(new CommandDTO("getMaxMemorySize", null, null).toBytes());
+
         LockSupport.park();
         return (int) map.get("getMaxMemorySize");
     }
-
 
 
     @Override
     public void close() throws Exception {
         channel.close().sync();
     }
+
 }
 

@@ -1,4 +1,4 @@
-package com.lzp.cacheclient;
+package com.lzp.protocol;
 
 import java.io.Serializable;
 
@@ -8,10 +8,19 @@ import java.io.Serializable;
  * @author: Lu ZePing
  * @date: 2020/6/18 19:03
  */
-class CommandDTO implements Serializable {
+public class CommandDTO extends AbstractDTO {
+
     private String type;
     private Object key;
     private Object value;
+
+    public Object getKey() {
+        return key;
+    }
+
+    public Object getValue() {
+        return value;
+    }
 
     public CommandDTO(String type, Object key, Object value) {
         this.type = type;
@@ -31,4 +40,5 @@ class CommandDTO implements Serializable {
                 ", value=" + value +
                 '}';
     }
+
 }
