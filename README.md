@@ -2,7 +2,7 @@
 缓存中间件客户端， 使用方法：
 1、添加maven依赖
 G com.lzp.lxucache
-A lxucache-server
+A lxuCache-client
 V 1.0-SNAPSHOT   
 
 2、new CacheClient(ip，port); 
