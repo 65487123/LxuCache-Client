@@ -46,41 +46,41 @@ public class CacheClient implements AutoCloseable {
     }
 
 
-    public synchronized Object get(Object key) {
+    public synchronized Object get(String key) {
         Map<String,Object> map = ClientHandler.channelObjectMap.get(this.channel);
         map.put("get",Thread.currentThread());
-        channel.writeAndFlush(new CommandDTO("get",key,null).toBytes());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("get").setKey(key).setValue(null).build());
         LockSupport.park();
         return map.get("get");
     }
 
-    public synchronized Object put(Object key, Object value) {
+    public synchronized Object put(String key, String value) {
         Map<String, Object> map = ClientHandler.channelObjectMap.get(this.channel);
         map.put("put", Thread.currentThread());
-        channel.writeAndFlush(new CommandDTO("put", key, value).toBytes());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("put").setKey(key).setValue(value).build());
         LockSupport.park();
         return map.get("put");
     }
 
 
-    public synchronized Object remove(Object key) {
+    public synchronized Object remove(String key) {
         Map<String, Object> map = ClientHandler.channelObjectMap.get(this.channel);
         map.put("remove", Thread.currentThread());
-        channel.writeAndFlush(new CommandDTO("remove", key, null).toBytes());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("remove").setKey(key).setValue(null).build());
 
         LockSupport.park();
         return map.get("remove");
     }
 
-
-    public synchronized int getMaxMemorySize() {
+    ///暂时不要这个方法
+    /*public synchronized int getMaxMemorySize() {
         Map<String, Object> map = ClientHandler.channelObjectMap.get(this.channel);
         map.put("getMaxMemorySize", Thread.currentThread());
         channel.writeAndFlush(new CommandDTO("getMaxMemorySize", null, null).toBytes());
 
         LockSupport.park();
         return (int) map.get("getMaxMemorySize");
-    }
+    }*/
 
 
     @Override
