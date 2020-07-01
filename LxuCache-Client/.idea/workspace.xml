@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix 修改序列化反序列化协议">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/exception/MutiThreadOperCliException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyHandler/ClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyHandler/ClientInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/protocol.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j/log4j.properties" afterDir="false" />
-    </list>
+    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -144,7 +127,7 @@
       <workItem from="1592711168527" duration="13975000" />
       <workItem from="1592789617454" duration="5450000" />
       <workItem from="1593329730720" duration="510000" />
-      <workItem from="1593330383523" duration="49486000" />
+      <workItem from="1593330383523" duration="49820000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -153,7 +136,21 @@
       <option name="project" value="LOCAL" />
       <updated>1593513519838</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix 简化客户端">
+      <created>1593603689976</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1593603689976</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix">
+      <created>1593603845888</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1593603845888</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,7 +159,9 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fix 修改序列化反序列化协议" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix 修改序列化反序列化协议" />
+    <MESSAGE value="fix 简化客户端" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592552481004">
