@@ -1,16 +1,16 @@
-package com.lzp.cacheclient;
+package com.lzp.nettyHandler;
 
 import com.lzp.protocol.*;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 
-
 /**
- * @Author：luzeping
- * @Date: 2020/1/9 14:30
+ * Description:
+ *
+ * @author: Lu ZePing
+ * @date: 2020/7/1 12:58
  */
 public class ClientInitializer extends ChannelInitializer {
-
     @Override
     protected void initChannel(Channel channel) {
         channel.pipeline().addLast(new LzpMessageDecoder()).addLast(new LzpProtobufDecoder(ResponseDTO.Response.getDefaultInstance()))

@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/model/command.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix 修改序列化反序列化协议">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/exception/MutiThreadOperCliException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyHandler/ClientHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyHandler/ClientInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/protocol.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/Cache.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/LruCache.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/CommandDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/CommandDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ClientInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j/log4j.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +61,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/lzp/protocol" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../sjw-redis-client" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -71,6 +69,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src" />
       <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\model" />
       <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\protocol" />
     </key>
@@ -87,7 +86,7 @@
       <recent name="E:\LxuCache-Client\src\main\java\com\lzp\cacheclient" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test (2)">
+  <component name="RunManager" selected="Application.Test (1)">
     <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test" />
       <module name="LxuCache-Client" />
@@ -123,8 +122,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test (2)" />
         <item itemvalue="Application.Test (1)" />
+        <item itemvalue="Application.Test (2)" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -145,8 +144,16 @@
       <workItem from="1592711168527" duration="13975000" />
       <workItem from="1592789617454" duration="5450000" />
       <workItem from="1593329730720" duration="510000" />
-      <workItem from="1593330383523" duration="30066000" />
+      <workItem from="1593330383523" duration="49486000" />
     </task>
+    <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
+      <created>1593513519838</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1593513519838</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +161,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fix 修改序列化反序列化协议" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix 修改序列化反序列化协议" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592552481004">
@@ -164,18 +173,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="729" y="600" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593346199861" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1593509656324">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1593585155371">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593509656324" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593585155371" />
     <state x="529" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593513474908">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="529" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593513474908" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593432103278">
+    <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593579417270">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593432103278" />
+    <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593579417270" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593596657265">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593596657265" />
     <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate" timestamp="1593507688070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -192,46 +205,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-298" y="208" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593507030779" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1593330796525">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1593572272647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593330796525" />
-    <state width="1877" height="233" key="GridCell.Tab.0.bottom" timestamp="1593513255030">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593572272647" />
+    <state width="1877" height="290" key="GridCell.Tab.0.bottom" timestamp="1593603402101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="233" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593513255030" />
-    <state width="1877" height="233" key="GridCell.Tab.0.center" timestamp="1593513255030">
+    <state width="1877" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593603402101" />
+    <state width="1877" height="290" key="GridCell.Tab.0.center" timestamp="1593603402101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="233" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593513255030" />
-    <state width="1877" height="233" key="GridCell.Tab.0.left" timestamp="1593513255030">
+    <state width="1877" height="290" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593603402101" />
+    <state width="1877" height="290" key="GridCell.Tab.0.left" timestamp="1593603402101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="233" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593513255030" />
-    <state width="1877" height="233" key="GridCell.Tab.0.right" timestamp="1593513255030">
+    <state width="1877" height="290" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593603402101" />
+    <state width="1877" height="290" key="GridCell.Tab.0.right" timestamp="1593603402101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="233" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593513255030" />
-    <state width="1877" height="308" key="GridCell.Tab.1.bottom" timestamp="1593510297202">
+    <state width="1877" height="290" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593603402101" />
+    <state width="1877" height="308" key="GridCell.Tab.1.bottom" timestamp="1593603177449">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="308" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593510297202" />
-    <state width="1877" height="308" key="GridCell.Tab.1.center" timestamp="1593510297201">
+    <state width="1877" height="308" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593603177449" />
+    <state width="1877" height="308" key="GridCell.Tab.1.center" timestamp="1593603177449">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="308" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593510297201" />
-    <state width="1877" height="308" key="GridCell.Tab.1.left" timestamp="1593510297201">
+    <state width="1877" height="308" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593603177449" />
+    <state width="1877" height="308" key="GridCell.Tab.1.left" timestamp="1593603177449">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="308" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593510297201" />
-    <state width="1877" height="308" key="GridCell.Tab.1.right" timestamp="1593510297202">
+    <state width="1877" height="308" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593603177449" />
+    <state width="1877" height="308" key="GridCell.Tab.1.right" timestamp="1593603177449">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="308" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593510297202" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1593504477970">
+    <state width="1877" height="308" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593603177449" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1593573886187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593504477970" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593573886187" />
     <state x="927" y="387" key="com.intellij.ide.util.TipDialog" timestamp="1593330464270">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -249,8 +262,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java</url>
-          <line>57</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/ConcurrentCacheClient.java</url>
+          <line>58</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
