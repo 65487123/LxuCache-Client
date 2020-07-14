@@ -1,4 +1,4 @@
-package com.lzp.nettyHandler;
+package com.lzp.nettyhandler;
 
 import com.lzp.protocol.*;
 import io.netty.channel.Channel;

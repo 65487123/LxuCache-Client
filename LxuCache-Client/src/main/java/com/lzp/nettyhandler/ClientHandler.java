@@ -1,4 +1,4 @@
-package com.lzp.nettyHandler;
+package com.lzp.nettyhandler;
 
 import com.lzp.protocol.ResponseDTO;
 import io.netty.channel.Channel;
@@ -8,9 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.LockSupport;
 
@@ -22,6 +19,10 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class ClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Response> {
     private static final Logger logger = LoggerFactory.getLogger(ClientHandler.class);
+
+    /**
+     * key是client对应的channel，value是client对应的线程和当次操作的结果(如果有的话)
+     **/
     public static Map<Channel, ThreadResultObj> channelResultMap = new ConcurrentHashMap<>(256);
 
     public static class ThreadResultObj{
