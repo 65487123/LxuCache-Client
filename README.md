@@ -4,11 +4,11 @@
 
 # 	使用方法：
     1、添加maven依赖
-    `<dependency>`
-        `<groupId>com.lzp.lxucache</groupId>`
-        `<artifactId>lxuCache-client</artifactId>`
-        `<version>1.0-SNAPSHOT</version>`
-    `</dependency>`
+    <dependency>
+        <groupId>com.lzp.lxucache</groupId>
+        <artifactId>lxuCache-client</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
 
 
     2、new CacheClient(ip，port);
