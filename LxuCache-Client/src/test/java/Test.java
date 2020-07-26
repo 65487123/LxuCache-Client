@@ -1,5 +1,5 @@
+
 import com.alibaba.fastjson.JSON;
-import com.google.protobuf.MessageLite;
 import com.lzp.cacheclient.CacheClient;
 import com.lzp.protocol.CommandDTO;
 import redis.clients.jedis.Jedis;
@@ -108,7 +108,7 @@ public class Test {
             cacheClient.put(String.valueOf(i),String.valueOf(i));
         }
         System.out.println(Instant.now().toEpochMilli()-now);*/
-        CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
+        /*CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
         cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
@@ -137,8 +137,7 @@ public class Test {
         System.out.println(cacheClient.get("1"));
         System.out.println(cacheClient.get("3"));
         Thread.sleep(2001);
-        System.out.println(cacheClient.get("3"));
-
-
+        System.out.println(cacheClient.get("3"));*/
+        JSON.toJSONString(new Object());
     }
 }

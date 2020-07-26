@@ -18,7 +18,7 @@ public class ValueUtil {
     public static String mapToString(Map<String, String> map) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            stringBuilder.append(entry.getKey()).append(":")
+            stringBuilder.append(entry.getKey()).append("©")
                     .append(entry.getValue()).append("⚫");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
@@ -36,7 +36,7 @@ public class ValueUtil {
     public static String mapWithDouToSimplifiedJson(Map<String, Double> map) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, Double> entry : map.entrySet()) {
-            stringBuilder.append(entry.getKey()).append(":")
+            stringBuilder.append(entry.getKey()).append("©")
                     .append(entry.getValue()).append(",");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
