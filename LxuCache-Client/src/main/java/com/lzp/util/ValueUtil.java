@@ -19,7 +19,7 @@ public class ValueUtil {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, String> entry : map.entrySet()) {
             stringBuilder.append(entry.getKey()).append("©")
-                    .append(entry.getValue()).append("⚫");
+                    .append(entry.getValue()).append("È");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         return stringBuilder.toString();
@@ -52,7 +52,7 @@ public class ValueUtil {
     public static String arrayToString(String... strings) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String string  : strings) {
-            stringBuilder.append(string).append("⚫");
+            stringBuilder.append(string).append("È");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         return stringBuilder.toString();
@@ -66,7 +66,7 @@ public class ValueUtil {
     public static String collectionToString(Collection<String> strings) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String string : strings) {
-            stringBuilder.append(string).append("⚫");
+            stringBuilder.append(string).append("È");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         return stringBuilder.toString();
@@ -80,7 +80,7 @@ public class ValueUtil {
      **/
     public static List<String> stringToList(String listString) {
         List<String> list = new ArrayList<>();
-        for (String string : listString.split("⚫")) {
+        for (String string : listString.split("È")) {
             list.add(string);
         }
         return list;
@@ -93,7 +93,7 @@ public class ValueUtil {
      **/
     public static Set<String> stringToSet(String listString) {
         Set<String> set = new HashSet<>();
-        for (String string : listString.split("⚫")) {
+        for (String string : listString.split("È")) {
             set.add(string);
         }
         return set;

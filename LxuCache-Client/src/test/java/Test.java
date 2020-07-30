@@ -27,21 +27,21 @@ public class Test {
         List<Jedis> jedises = new ArrayList<>();
         List<CacheClient> cacheClientList1 = new ArrayList<>();
         //往三个连接池里加连接
-        for (int i=0;i<256;i++){
+        for (int i=0;i<25;i++){
             cacheClientList.add(new CacheClient("10.240.30.78",8888));
         }
-        for (int i=0;i<256;i++){
-            cacheClientList1.add(new CacheClient("10.240.30.78" ,8887));
+        for (int i=0;i<25;i++){
+            cacheClientList1.add(new CacheClient("127.0.0.1" ,8887));
         }
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i=0;i<256;i++){
+        for (int i=0;i<25;i++){
             jedises.add(new Jedis("10.240.30.78",6379));
-        }
-        CountDownLatch countDownLatch = new CountDownLatch(2);
+        }*/
+        /*CountDownLatch countDownLatch = new CountDownLatch(2);
         long now = Instant.now().toEpochMilli();
         for (int i = 0; i <2; i++) {
             int finalI = i;
@@ -76,9 +76,9 @@ public class Test {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Instant.now().toEpochMilli()-now);
-        CountDownLatch countDownLatch1 = new CountDownLatch(2);
-        now = Instant.now().toEpochMilli();
+        System.out.println(Instant.now().toEpochMilli()-now);*/
+        /*CountDownLatch countDownLatch1 = new CountDownLatch(2);
+        long now = Instant.now().toEpochMilli();
         for (int i = 0; i < 2; i++) {
             int finalI = i;
             threadPool.execute(() -> {
@@ -108,8 +108,8 @@ public class Test {
             cacheClient.put(String.valueOf(i),String.valueOf(i));
         }
         System.out.println(Instant.now().toEpochMilli()-now);*/
-        /*CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
-        cacheClient.put("1","2");
+        CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
+        /*cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
         list.add("5");
@@ -137,7 +137,14 @@ public class Test {
         System.out.println(cacheClient.get("1"));
         System.out.println(cacheClient.get("3"));
         Thread.sleep(2001);
-        System.out.println(cacheClient.get("3"));*/
-        JSON.toJSONString(new Object());
+        System.out.println(cacheClient.get("3"));
+        long now = Instant.now().toEpochMilli();
+        for (int i=10000;i<45200;i++){
+            cacheClient.put(String.valueOf(i),String.valueOf(i));
+        }
+        System.out.println(Instant.now().toEpochMilli()-now);
+        cacheClient.expire("13532",60);*/
+        System.out.println(cacheClient.get("13532"));
+
     }
 }
