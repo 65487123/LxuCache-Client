@@ -89,9 +89,14 @@ public interface Client extends AutoCloseable{
      * @param set 增加的值
      * @Return
      **/
-    void zadd(String key, Map<String, Double> set);
+    void zadd(String key, Map<Double, String> set);
 
-
+    /**
+     * Description ：key对应的set增加值，如果key不存在会创建
+     * @param key key值
+     * @Return
+     **/
+    void zadd(String key, Double score,String member);
     /**
      * Description ：根据key和map的key得到Map类型里的一条记录
      * @param key key值
@@ -136,4 +141,26 @@ public interface Client extends AutoCloseable{
      * @param key key值
      **/
     void remove(String key);
+
+    Set<String> zrange(String key, long start, long end);
+
+    Long zrem(String key, String... member);
+
+    Double zincrby(String key, double score, String member);
+
+    Long zrank(String key, String member);
+
+    Long zrevrank(String key, String member);
+
+    Set<String> zrevrange(String key, long start, long end);
+
+    Long zcard(String key);
+
+    Double zscore(String key, String member);
+
+    Long zcount(String key, double min, double max);
+
+    Set<String> zrangeByScore(String key, double min, double max);
+
+    void hset(String key , String member,String value);
 }

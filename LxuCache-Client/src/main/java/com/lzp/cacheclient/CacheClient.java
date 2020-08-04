@@ -4,7 +4,7 @@ import com.lzp.exception.CacheDataException;
 import com.lzp.nettyhandler.ClientHandler;
 import com.lzp.nettyhandler.ClientInitializer;
 import com.lzp.protocol.CommandDTO;
-import com.lzp.util.ValueUtil;
+import com.lzp.util.SerialUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.LockSupport;
-import java.util.zip.DataFormatException;
 
 /**
  * Description:
@@ -56,55 +55,88 @@ public class CacheClient implements Client {
 
 
     @Override
-    public Long incr(String key) {
+    public synchronized Long incr(String key) {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("incr").setKey(key).build());
         LockSupport.park();
-        return Long.parseLong(threadResultObj.getResult());
+        try {
+            return Long.parseLong(threadResultObj.getResult());
+        } catch (ClassCastException e){
+            throw new CacheDataException();
+        }
     }
 
     @Override
-    public Long decr(String key) {
+    public synchronized Long decr(String key) {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("decr").setKey(key).build());
         LockSupport.park();
-        return Long.parseLong(threadResultObj.getResult());
+        try {
+            return Long.parseLong(threadResultObj.getResult());
+        } catch (ClassCastException e) {
+            throw new CacheDataException();
+        }
     }
 
     @Override
-    public void hput(String key, Map<String, String> map) {
+    public synchronized void hput(String key, Map<String, String> map) {
         threadResultObj.setThread(Thread.currentThread());
-        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hput").setKey(key).setValue(ValueUtil.mapToString(map)).build());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hput").setKey(key).setValue(SerialUtil.mapToString(map)).build());
         LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
     }
 
     @Override
-    public void hmerge(String key, Map<String, String> map) {
+    public synchronized void hmerge(String key, Map<String, String> map) {
         threadResultObj.setThread(Thread.currentThread());
-        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hmerge").setKey(key).setValue(ValueUtil.mapToString(map)).build());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hmerge").setKey(key).setValue(SerialUtil.mapToString(map)).build());
         LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
     }
 
     @Override
-    public void lpush(String key, List<String> list) {
+    public synchronized void lpush(String key, List<String> list) {
         threadResultObj.setThread(Thread.currentThread());
-        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("lpush").setKey(key).setValue(ValueUtil.collectionToString(list)).build());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("lpush").setKey(key).setValue(SerialUtil.collectionToString(list)).build());
         LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
     }
 
 
     @Override
-    public void sadd(String key, Set<String> set) {
+    public synchronized void sadd(String key, Set<String> set) {
         threadResultObj.setThread(Thread.currentThread());
-        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("sadd").setKey(key).setValue(ValueUtil.collectionToString(set)).build());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("sadd").setKey(key).setValue(SerialUtil.collectionToString(set)).build());
         LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
     }
 
     @Override
-    public void zadd(String key, Map<String, Double> zset) {
+    public synchronized void zadd(String key, Map<Double, String> zset) {
         threadResultObj.setThread(Thread.currentThread());
-        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("zadd").setKey(key).setValue(ValueUtil.mapWithDouToSimplifiedJson(zset)).build());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("zadd").setKey(key).setValue(SerialUtil.mapWithDouToString(zset)).build());
         LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
+    }
+
+    @Override
+    public synchronized void zadd(String key, Double score, String member) {
+        threadResultObj.setThread(Thread.currentThread());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("zadd").setKey(key).setValue(score+"©"+member).build());
+        LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
     }
 
     @Override
@@ -121,6 +153,73 @@ public class CacheClient implements Client {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("remove").setKey(key).build());
         LockSupport.park();
+    }
+
+    @Override
+    public Set<String> zrange(String key, long start, long end) {
+        threadResultObj.setThread(Thread.currentThread());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("zrange").setKey(key).setValue(start+"©"+end).build());
+        LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }else {
+            return SerialUtil.stringToSet(threadResultObj.getResult());
+        }
+    }
+
+    @Override
+    public Long zrem(String key, String... member) {
+        return null;
+    }
+
+    @Override
+    public Double zincrby(String key, double score, String member) {
+        return null;
+    }
+
+    @Override
+    public Long zrank(String key, String member) {
+        return null;
+    }
+
+    @Override
+    public Long zrevrank(String key, String member) {
+        return null;
+    }
+
+    @Override
+    public Set<String> zrevrange(String key, long start, long end) {
+        return null;
+    }
+
+    @Override
+    public Long zcard(String key) {
+        return null;
+    }
+
+    @Override
+    public Double zscore(String key, String member) {
+        return null;
+    }
+
+    @Override
+    public Long zcount(String key, double min, double max) {
+        return null;
+    }
+
+    @Override
+    public Set<String> zrangeByScore(String key, double min, double max) {
+        return null;
+    }
+
+    @Override
+    public void hset(String key, String member, String value) {
+        threadResultObj.setThread(Thread.currentThread());
+        channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hset").setKey(key).setValue(member + "©" + value).build());
+        LockSupport.park();
+        if ("e".equals(threadResultObj.getResult())) {
+            throw new CacheDataException();
+        }
     }
 
     @Override
@@ -145,7 +244,7 @@ public class CacheClient implements Client {
         if ("e".equals(result)) {
             throw new CacheDataException();
         } else {
-            return "null".equals(result) ? null : ValueUtil.stringToList(result);
+            return "null".equals(result) ? null : SerialUtil.stringToList(result);
         }
     }
 
@@ -158,7 +257,7 @@ public class CacheClient implements Client {
         if ("e".equals(result)) {
             throw new CacheDataException();
         } else {
-            return "null".equals(result) ? null : ValueUtil.stringToSet(result);
+            return "null".equals(result) ? null : SerialUtil.stringToSet(result);
         }
     }
 

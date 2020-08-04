@@ -8,7 +8,7 @@ import java.util.*;
  * @author: Lu ZePing
  * @date: 2020/7/9 17:06
  */
-public class ValueUtil {
+public class SerialUtil {
     /**
      * Description ：把map转为字符串
      *
@@ -27,17 +27,16 @@ public class ValueUtil {
 
 
     /**
-     * Description ：由于把map转为字符串纯粹只为满足自己的私有协议，并不会给外界使用，所以没必要转成标准json。
-     * 这样序列化反序列化效率能高一点，网络传输的内容也少点。
+     * Description ：
      *
      * @param map 需要序列化的map
      * @Return
      **/
-    public static String mapWithDouToSimplifiedJson(Map<String, Double> map) {
+    public static String mapWithDouToString(Map<Double, String> map) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<String, Double> entry : map.entrySet()) {
+        for (Map.Entry<Double, String> entry : map.entrySet()) {
             stringBuilder.append(entry.getKey()).append("©")
-                    .append(entry.getValue()).append(",");
+                    .append(entry.getValue()).append("È");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         return stringBuilder.toString();
@@ -92,7 +91,7 @@ public class ValueUtil {
      * @Return
      **/
     public static Set<String> stringToSet(String listString) {
-        Set<String> set = new HashSet<>();
+        Set<String> set = new LinkedHashSet<>();
         for (String string : listString.split("È")) {
             set.add(string);
         }

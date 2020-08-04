@@ -109,7 +109,7 @@ public class Test {
         }
         System.out.println(Instant.now().toEpochMilli()-now);*/
         CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
-        /*cacheClient.put("1","2");
+        cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
         list.add("5");
@@ -143,8 +143,17 @@ public class Test {
             cacheClient.put(String.valueOf(i),String.valueOf(i));
         }
         System.out.println(Instant.now().toEpochMilli()-now);
-        cacheClient.expire("13532",60);*/
-        System.out.println(cacheClient.get("13532"));
-
+       /* cacheClient.zadd("165555",1.5,"3");
+        cacheClient.zadd("165555",1.6,"1");
+        cacheClient.zadd("165555",2.98,"7");
+        cacheClient.zadd("165555",8.98,"11");
+        cacheClient.zadd("165555",0.98,"5");
+        System.out.println(cacheClient.zrange("165555",0,4));*/
+        /*Jedis jedis = new Jedis("10.240.30.78",6379);
+        jedis.zadd("104441",1.2,"2");
+        jedis.zadd("104441",1.5,"24");
+        jedis.zadd("104441",1.82,"22");
+        jedis.zadd("104441",1.0,"23");
+        System.out.println(jedis.zrange("104441",0,3));*/
     }
 }
