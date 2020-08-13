@@ -2,7 +2,9 @@
 import com.alibaba.fastjson.JSON;
 import com.lzp.cacheclient.CacheClient;
 import com.lzp.protocol.CommandDTO;
+import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,27 +29,27 @@ public class Test {
         List<Jedis> jedises = new ArrayList<>();
         List<CacheClient> cacheClientList1 = new ArrayList<>();
         //往三个连接池里加连接
-        for (int i=0;i<25;i++){
+        for (int i=0;i<100;i++){
             cacheClientList.add(new CacheClient("10.240.30.78",8888));
         }
-        for (int i=0;i<25;i++){
-            cacheClientList1.add(new CacheClient("127.0.0.1" ,8887));
+        for (int i=0;i<100;i++){
+            cacheClientList1.add(new CacheClient("10.240.30.78" ,8887));
         }
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i=0;i<25;i++){
+        for (int i=0;i<100;i++){
             jedises.add(new Jedis("10.240.30.78",6379));
-        }*/
-        /*CountDownLatch countDownLatch = new CountDownLatch(2);
+        }
+        CountDownLatch countDownLatch = new CountDownLatch(100);
         long now = Instant.now().toEpochMilli();
-        for (int i = 0; i <2; i++) {
+        for (int i = 0; i <100; i++) {
             int finalI = i;
             threadPool.execute(() -> {
                 Jedis jedis = jedises.get(finalI);
-                for (long j = 0; j < 20000; j++) {
+                for (long j = 0; j < 1000; j++) {
                     jedis.set(String.valueOf(j), String.valueOf(j));
                 }
                 countDownLatch.countDown();
@@ -60,12 +62,12 @@ public class Test {
         }
         System.out.println(Instant.now().toEpochMilli()-now);
         now = Instant.now().toEpochMilli();
-        CountDownLatch countDownLatch0 = new CountDownLatch(2);
-        for (int i = 0; i < 2; i++) {
+        CountDownLatch countDownLatch0 = new CountDownLatch(100);
+        for (int i = 0; i < 100; i++) {
             int finalI = i;
             threadPool.execute(() -> {
                 CacheClient cacheClient = cacheClientList.get(finalI);
-                for (long j = 0; j < 20000; j++) {
+                for (long j = 0; j < 1000; j++) {
                     cacheClient.put(String.valueOf(j), String.valueOf(j));
                 }
                 countDownLatch0.countDown();
@@ -76,14 +78,14 @@ public class Test {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Instant.now().toEpochMilli()-now);*/
-        /*CountDownLatch countDownLatch1 = new CountDownLatch(2);
-        long now = Instant.now().toEpochMilli();
-        for (int i = 0; i < 2; i++) {
+        System.out.println(Instant.now().toEpochMilli()-now);
+        CountDownLatch countDownLatch1 = new CountDownLatch(100);
+        now = Instant.now().toEpochMilli();
+        for (int i = 0; i < 100; i++) {
             int finalI = i;
             threadPool.execute(() -> {
                 CacheClient cacheClient = cacheClientList1.get(finalI);
-                for (long j = 0; j < 20000; j++) {
+                for (long j = 0; j < 1000; j++) {
                     cacheClient.put(String.valueOf(j), String.valueOf(j));
                 }
                 countDownLatch1.countDown();
@@ -155,5 +157,7 @@ public class Test {
         jedis.zadd("104441",1.82,"22");
         jedis.zadd("104441",1.0,"23");
         System.out.println(jedis.zrange("104441",0,3));*/
-    }
+        //JedisCluster jedisCluster = new JedisCluster();
+
+     }
 }

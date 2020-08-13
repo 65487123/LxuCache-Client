@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix 修改序列化协议">
+    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClientCluster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/ValueUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/util/SerialUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -53,13 +54,15 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src" />
-      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\model" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\protocol" />
+      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main\resources" />
+      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main" />
+      <recent name="E:\LxuCache-Client\src\main\java\com\lzp\cacheclient" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
@@ -67,11 +70,10 @@
       <recent name="com.lzp.cacheclient" />
       <recent name="com.lzp.nettyclient" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\model" />
+      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src" />
       <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\protocol" />
-      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main\resources" />
-      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main" />
-      <recent name="E:\LxuCache-Client\src\main\java\com\lzp\cacheclient" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Test (1)">
@@ -95,12 +97,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lzp.protocol.Test" />
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lzp.Test" />
       <module name="LxuCache-Client" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lzp.protocol.*" />
+          <option name="PATTERN" value="com.lzp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -109,11 +111,11 @@
       </method>
     </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lzp.Test" />
+      <option name="MAIN_CLASS_NAME" value="com.lzp.protocol.Test" />
       <module name="LxuCache-Client" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lzp.*" />
+          <option name="PATTERN" value="com.lzp.protocol.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,6 +151,7 @@
       <workItem from="1593330383523" duration="105584000" />
       <workItem from="1595668983072" duration="9913000" />
       <workItem from="1595819101032" duration="33949000" />
+      <workItem from="1597194239454" duration="14769000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -200,10 +203,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="729" y="600" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593346199861" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1596519191230">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1597316314410">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1596519191230" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1597316314410" />
     <state x="529" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593513474908">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -212,18 +215,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593579417270" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593596657265">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597315358454">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593596657265" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597315358454" />
     <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate" timestamp="1593507688070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1593507688070" />
-    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1596528846573">
+    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1596693254556">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596528846573" />
+    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596693254556" />
     <state width="458" height="466" key="DebuggerActiveHint" timestamp="1594635959192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -236,38 +239,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594262749387" />
-    <state width="1877" height="335" key="GridCell.Tab.0.bottom" timestamp="1596526389740">
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom" timestamp="1597316452865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596526389740" />
-    <state width="1877" height="335" key="GridCell.Tab.0.center" timestamp="1596526389740">
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
+    <state width="1877" height="310" key="GridCell.Tab.0.center" timestamp="1597316452865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596526389740" />
-    <state width="1877" height="335" key="GridCell.Tab.0.left" timestamp="1596526389740">
+    <state width="1877" height="310" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
+    <state width="1877" height="310" key="GridCell.Tab.0.left" timestamp="1597316452865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596526389740" />
-    <state width="1877" height="335" key="GridCell.Tab.0.right" timestamp="1596526389740">
+    <state width="1877" height="310" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right" timestamp="1597316452865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596526389740" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1596435455498">
+    <state width="1877" height="310" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1597194163385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596435455498" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1596435455498">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1597194163385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596435455498" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1596435455498">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1597194163385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596435455498" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1596435455498">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1597194163385">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596435455498" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1593573886187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -276,14 +279,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="927" y="387" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593330464270" />
+    <state x="567" y="220" width="786" height="600" key="find.popup" timestamp="1596770205645">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="567" y="220" width="786" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596770205645" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1593505485114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593505485114" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594196351569">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597308017836">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594196351569" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597308017836" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
