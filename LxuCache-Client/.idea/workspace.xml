@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClientCluster.java" afterDir="false" />
+    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/util/HashUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClientCluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClientCluster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +63,7 @@
       <recent name="E:\LxuCache-Client\src\main\java\com\lzp\cacheclient" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lzp.util" />
       <recent name="" />
       <recent name="com.lzp.protocol" />
       <recent name="com.lzp.cacheclient" />
@@ -219,10 +218,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597315358454" />
-    <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate" timestamp="1593507688070">
+    <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate" timestamp="1597396536330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1593507688070" />
+    <state x="597" y="431" width="737" height="597" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597396536330" />
     <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1596693254556">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -239,38 +238,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594262749387" />
-    <state width="1877" height="310" key="GridCell.Tab.0.bottom" timestamp="1597316452865">
+    <state width="1877" height="345" key="GridCell.Tab.0.bottom" timestamp="1597396828290">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
-    <state width="1877" height="310" key="GridCell.Tab.0.center" timestamp="1597316452865">
+    <state width="1877" height="345" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597396828290" />
+    <state width="1877" height="345" key="GridCell.Tab.0.center" timestamp="1597396828290">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
-    <state width="1877" height="310" key="GridCell.Tab.0.left" timestamp="1597316452865">
+    <state width="1877" height="345" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597396828290" />
+    <state width="1877" height="345" key="GridCell.Tab.0.left" timestamp="1597396828290">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
-    <state width="1877" height="310" key="GridCell.Tab.0.right" timestamp="1597316452865">
+    <state width="1877" height="345" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597396828290" />
+    <state width="1877" height="345" key="GridCell.Tab.0.right" timestamp="1597396828290">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="310" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597316452865" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1597194163385">
+    <state width="1877" height="345" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597396828290" />
+    <state width="1877" height="345" key="GridCell.Tab.1.bottom" timestamp="1597396512596">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1597194163385">
+    <state width="1877" height="345" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597396512596" />
+    <state width="1877" height="345" key="GridCell.Tab.1.center" timestamp="1597396512596">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1597194163385">
+    <state width="1877" height="345" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597396512596" />
+    <state width="1877" height="345" key="GridCell.Tab.1.left" timestamp="1597396512596">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1597194163385">
+    <state width="1877" height="345" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597396512596" />
+    <state width="1877" height="345" key="GridCell.Tab.1.right" timestamp="1597396512596">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597194163385" />
+    <state width="1877" height="345" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597396512596" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1593573886187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -279,18 +278,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="927" y="387" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593330464270" />
-    <state x="567" y="220" width="786" height="600" key="find.popup" timestamp="1596770205645">
+    <state x="567" y="220" width="786" height="600" key="find.popup" timestamp="1597389237423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="567" y="220" width="786" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596770205645" />
+    <state x="567" y="220" width="786" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597389237423" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1593505485114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593505485114" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597308017836">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597381094149">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597308017836" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597381094149" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -304,6 +303,16 @@
           <url>jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.42.Final/netty-all-4.1.42.Final-sources.jar!/io/netty/handler/codec/protobuf/ProtobufEncoder.java</url>
           <line>65</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClientCluster.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/Client.java</url>
