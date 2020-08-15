@@ -1,18 +1,10 @@
 
-import com.alibaba.fastjson.JSON;
 import com.lzp.cacheclient.CacheClient;
-import com.lzp.protocol.CommandDTO;
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
+import com.lzp.cacheclient.CacheClusterClient;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * Description:有连接池的情况下，多客户端并发写，性能比redis要高一点
@@ -158,6 +150,33 @@ public class Test {
         jedis.zadd("104441",1.0,"23");
         System.out.println(jedis.zrange("104441",0,3));*/
         //JedisCluster jedisCluster = new JedisCluster();
-
-     }
+        /*List<CacheClusterClient.HostAndPort> hostAndPorts = new ArrayList<>();
+        hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8887));
+        hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8886));
+        CacheClusterClient cacheClient = new CacheClusterClient(hostAndPorts);
+        cacheClient.put("1","2");
+        List<String> list = new ArrayList<>();
+        list.add("3,");
+        list.add("5");
+        cacheClient.lpush("2",list);
+        Map<String,String> map = new HashMap<>();
+        map.put("3","2");
+        map.put("5","1");
+        cacheClient.hput("3",map);
+        Set<String>  set = new HashSet<>();
+        set.add("3");
+        set.add("5");
+        set.add("1");
+        cacheClient.sadd("4",set);
+        System.out.println(cacheClient.get("1"));
+        System.out.println(cacheClient.getList("2"));
+        System.out.println(cacheClient.hget("3","3"));
+        System.out.println(cacheClient.hget("3","5"));
+        System.out.println(cacheClient.getSet("4"));
+        System.out.println(cacheClient.incr("1"));
+        System.out.println(cacheClient.decr("1"));
+        System.out.println(cacheClient.scontain("4","5"));
+        cacheClient.expire("1",3);
+        cacheClient.expire("3",5);*/
+    }
 }

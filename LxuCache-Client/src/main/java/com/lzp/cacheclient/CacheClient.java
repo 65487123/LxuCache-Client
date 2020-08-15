@@ -40,6 +40,10 @@ public class CacheClient implements Client {
     public CacheClient(String ip, int port) throws InterruptedException {
         channel = bootstrap.connect(ip, port).sync().channel();
         threadResultObj = ClientHandler.channelResultMap.get(channel);
+        channel.closeFuture().addListener(future -> {
+            threadResultObj.setResult("e");
+            LockSupport.unpark(threadResultObj.getThread());
+        });
     }
 
 
@@ -154,7 +158,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public Set<String> zrange(String key, long start, long end) {
+    public synchronized Set<String> zrange(String key, long start, long end) {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("zrange").setKey(key).setValue(start+"©"+end).build());
         LockSupport.park();
@@ -211,7 +215,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public void hset(String key, String member, String value) {
+    public synchronized void hset(String key, String member, String value) {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hset").setKey(key).setValue(member + "©" + value).build());
         LockSupport.park();
@@ -221,7 +225,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public String hget(String key, String field) throws CacheDataException {
+    public synchronized String hget(String key, String field) throws CacheDataException {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("hget").setKey(key).setValue(field).build());
         LockSupport.park();
@@ -234,7 +238,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public List<String> getList(String key) throws CacheDataException {
+    public synchronized List<String> getList(String key) throws CacheDataException {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("getList").setKey(key).build());
         LockSupport.park();
@@ -247,7 +251,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public Set<String> getSet(String key) throws CacheDataException {
+    public synchronized Set<String> getSet(String key) throws CacheDataException {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("getSet").setKey(key).build());
         LockSupport.park();
@@ -260,7 +264,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public boolean scontain(String key, String element) throws CacheDataException {
+    public synchronized boolean scontain(String key, String element) throws CacheDataException {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("scontain").setKey(key).setValue(element).build());
         LockSupport.park();
@@ -273,7 +277,7 @@ public class CacheClient implements Client {
     }
 
     @Override
-    public Long expire(String key, int seconds) {
+    public synchronized Long expire(String key, int seconds) {
         threadResultObj.setThread(Thread.currentThread());
         channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("expire").setKey(key).setValue(String.valueOf(seconds)).build());
         LockSupport.park();
