@@ -165,8 +165,8 @@ public class CacheClusterClient implements Client {
             //第二种情况和第一种情况的第二种小情况一样。
             //第三种情况就是正常情况，出现问题一般会在主从复制上面，如果从还没复制全就选举为主了，秒杀场景就会出现超卖现象。
             //由于选举顺序是从节点加入顺序，并且从和从节点数据不一定完全一样的，所以当主挂了，选了个条数少的从，这个从升级为主服务了一段时间又挂了，再次选举另一个从，这样在秒杀场景还是会出现少卖现象。
-
             threadResultObj.setResult("close");
+            channels[index] = null;
             LockSupport.unpark(threadResultObj.getThread());
             HostAndPort slave = slaves.get(0);
             Channel channel1;
