@@ -17,7 +17,7 @@
     通过这个对象对服务端的缓存进行增删改查
 
     集群模式
-    new CacheClusterClinet(HostAndportList);
+    new CacheClusterClient(HostAndportList);
     参数为服务端所有的主从节点，客户端会自动找到所有主节点并做负
     载均衡，使用方法和单机模式一样，如果主挂了，客户端会自动找到
     新的主节点。用户不会感知。目前这个缓存中间件不支持运行时扩容。
