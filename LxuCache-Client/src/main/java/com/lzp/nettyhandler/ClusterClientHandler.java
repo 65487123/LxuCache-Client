@@ -2,6 +2,7 @@ package com.lzp.nettyhandler;
 
 import com.lzp.cacheclient.CacheClusterClient;
 import com.lzp.protocol.ResponseDTO;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -45,9 +46,10 @@ public class ClusterClientHandler extends SimpleChannelInboundHandler<ResponseDT
 
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, ResponseDTO.Response msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, ResponseDTO.Response msg) {
         ThreadResultObj threadResultObj = CacheClusterClient.masterChannelThreadResultMap.get(ctx.channel());
         threadResultObj.result = msg.getResult();
         LockSupport.unpark(threadResultObj.thread);
     }
+
 }

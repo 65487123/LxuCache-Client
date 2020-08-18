@@ -102,7 +102,7 @@ public class Test {
             cacheClient.put(String.valueOf(i),String.valueOf(i));
         }
         System.out.println(Instant.now().toEpochMilli()-now);*/
-        CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
+        /*CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
         cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
@@ -136,7 +136,7 @@ public class Test {
         for (int i=10000;i<45200;i++){
             cacheClient.put(String.valueOf(i),String.valueOf(i));
         }
-        System.out.println(Instant.now().toEpochMilli()-now);
+        System.out.println(Instant.now().toEpochMilli()-now);*/
        /* cacheClient.zadd("165555",1.5,"3");
         cacheClient.zadd("165555",1.6,"1");
         cacheClient.zadd("165555",2.98,"7");
@@ -150,11 +150,13 @@ public class Test {
         jedis.zadd("104441",1.0,"23");
         System.out.println(jedis.zrange("104441",0,3));*/
         //JedisCluster jedisCluster = new JedisCluster();
-        /*List<CacheClusterClient.HostAndPort> hostAndPorts = new ArrayList<>();
-        hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8887));
-        hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8886));
+        List<CacheClusterClient.HostAndPort> hostAndPorts = new ArrayList<>();
+        //hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8887));
+        hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8886));
+        hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8885));
+
         CacheClusterClient cacheClient = new CacheClusterClient(hostAndPorts);
-        cacheClient.put("1","2");
+        /*cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
         list.add("5");
@@ -168,7 +170,7 @@ public class Test {
         set.add("5");
         set.add("1");
         cacheClient.sadd("4",set);
-        System.out.println(cacheClient.get("1"));
+        System.out.println(cacheClient.get("1"));*/
         System.out.println(cacheClient.getList("2"));
         System.out.println(cacheClient.hget("3","3"));
         System.out.println(cacheClient.hget("3","5"));
@@ -177,6 +179,12 @@ public class Test {
         System.out.println(cacheClient.decr("1"));
         System.out.println(cacheClient.scontain("4","5"));
         cacheClient.expire("1",3);
-        cacheClient.expire("3",5);*/
+        cacheClient.expire("3",5);
+        Thread.sleep(3002);
+        System.out.println(cacheClient.get("1"));
+        System.out.println(cacheClient.get("3"));
+        Thread.sleep(2010);
+        System.out.println(cacheClient.get("3"));
+        long now = Instant.now().toEpochMilli();
     }
 }

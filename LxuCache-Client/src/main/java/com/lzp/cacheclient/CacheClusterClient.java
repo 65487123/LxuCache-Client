@@ -14,12 +14,14 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.LockSupport;
 
 
@@ -35,14 +37,25 @@ import java.util.concurrent.locks.LockSupport;
 public class CacheClusterClient implements Client {
 
     private static final Logger logger = LoggerFactory.getLogger(CacheClusterClient.class);
+
     private static EventLoopGroup eventExecutors = new NioEventLoopGroup(1);
+
     private static Bootstrap bootstrap = new Bootstrap();
+
+    private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("election"));
+
     private ClusterClientHandler.ThreadResultObj threadResultObj;
+
     private Map<Channel, List<HostAndPort>> hostAndPortListMap = new HashMap<>();
-    private Channel[] channels ;
+
+    private Channel[] channels;
+
     private final int N;
+
     private final boolean IS_POWER_OF_TWO;
+
     public static Map<Channel, ClusterClientHandler.ThreadResultObj> masterChannelThreadResultMap = new ConcurrentHashMap<>();
+
     static {
         bootstrap.group(eventExecutors).channel(NioSocketChannel.class).handler(new ClusterClientInitializer());
     }
@@ -156,50 +169,76 @@ public class CacheClusterClient implements Client {
         }
         Object lock = this;
         channel.closeFuture().addListener(future -> {
-            //收到断开连接事件，选举新主；
-            //下面的操作是在IO线程中执行的，也就是和channel读写是在一个线程中。
-            //唤醒请求的线程（有可能已经被唤醒），告知连接已经断开
-            //有三种可能会发生，1、没有成功得到请求结果触发事件，
-            // 2、成功得到请求结果，但还没返回出去  3、成功得到请求结果，并且返回出去了
-            //第一种情况又可以分为两种情况1、server端没执行2、server端成功执行了，在返回过程连接断了，这种情况在秒杀场景下就表现为少卖
-            //第二种情况和第一种情况的第二种小情况一样。
-            //第三种情况就是正常情况，出现问题一般会在主从复制上面，如果从还没复制全就选举为主了，秒杀场景就会出现超卖现象。
-            //由于选举顺序是从节点加入顺序，并且从和从节点数据不一定完全一样的，所以当主挂了，选了个条数少的从，这个从升级为主服务了一段时间又挂了，再次选举另一个从，这样在秒杀场景还是会出现少卖现象。
-            threadResultObj.setResult("close");
-            channels[index] = null;
-            LockSupport.unpark(threadResultObj.getThread());
-            HostAndPort slave = slaves.get(0);
-            Channel channel1;
-            synchronized (lock) {
-                while (true) {
-                    channel1 = bootstrap.connect(slave.host, slave.port).sync().channel();
-                    threadResultObj.setThread(Thread.currentThread());
-                    channel1.writeAndFlush(CommandDTO.Command.newBuilder().setType("getMaster").build());
-                    LockSupport.park();
-                    String result = threadResultObj.getResult();
-                    if (!"yes".equals(result)) {
-                        channel1.close().sync();
-                        String[] hostPort = result.split(":");
-                        int port = Integer.parseInt(hostPort[1]);
-                        InetSocketAddress inetSocketAddress = (InetSocketAddress) ((ChannelFuture) future).channel().remoteAddress();
-                        if (hostPort[0].equals(inetSocketAddress.getHostString()) && port == inetSocketAddress.getPort()) {
-                            Thread.sleep(1000);
-                            continue;
+            threadPool.execute(() -> {
+                //收到断开连接事件，选举新主；
+                //下面的操作是在IO线程中执行的，也就是和channel读写是在一个线程中。
+                //唤醒请求的线程（有可能已经被唤醒），告知连接已经断开
+                //有三种可能会发生，1、没有成功得到请求结果触发事件，
+                // 2、成功得到请求结果，但还没返回出去  3、成功得到请求结果，并且返回出去了
+                //第一种情况又可以分为两种情况1、server端没执行2、server端成功执行了，在返回过程连接断了，这种情况在秒杀场景下就表现为少卖
+                //第二种情况和第一种情况的第二种小情况一样。
+                //第三种情况就是正常情况，出现问题一般会在主从复制上面，如果从还没复制全就选举为主了，秒杀场景就会出现超卖现象。
+                //由于选举顺序是从节点加入顺序，并且从和从节点数据不一定完全一样的，所以当主挂了，选了个条数少的从，这个从升级为主服务了一段时间又挂了，再次选举另一个从，这样在秒杀场景还是会出现少卖现象。
+                threadResultObj.setResult("close");
+                channels[index] = null;
+                LockSupport.unpark(threadResultObj.getThread());
+                HostAndPort slave = slaves.get(0);
+                Channel channel1 = null;
+                synchronized (lock) {
+                    while (true) {
+                        try {
+                            channel1 = bootstrap.connect(slave.host, slave.port).sync().channel();
+                            threadResultObj.setThread(Thread.currentThread());
+                            masterChannelThreadResultMap.put(channel1, threadResultObj);
+                            channel1.writeAndFlush(CommandDTO.Command.newBuilder().setType("getMaster").build());
+                            LockSupport.park();
+                            String result = threadResultObj.getResult();
+                            if (!"yes".equals(result)) {
+                                masterChannelThreadResultMap.remove(channel1);
+                                channel1.close().sync();
+                                String[] hostPort = result.split(":");
+                                int port = Integer.parseInt(hostPort[1]);
+                                InetSocketAddress inetSocketAddress = (InetSocketAddress) ((ChannelFuture) future).channel().remoteAddress();
+                                if (hostPort[0].equals(inetSocketAddress.getHostString()) && port == inetSocketAddress.getPort()) {
+                                    Thread.sleep(1000);
+                                    continue;
+                                }
+                                slave = new HostAndPort(hostPort[0], port);
+                                channel1 = bootstrap.connect(hostPort[0], port).sync().channel();
+                                masterChannelThreadResultMap.put(channel1, threadResultObj);
+                            }
+                        } catch (InterruptedException e) {
+                            logger.error(e.getMessage(), e);
                         }
-                        slave = new HostAndPort(hostPort[0], port);
-                        channel1 = bootstrap.connect(hostPort[0], port).sync().channel();
+                        slaves.remove(slave);
+                        hostAndPortListMap.remove(channels[index]);
+                        hostAndPortListMap.put(channel1, slaves);
+                        channels[index] = channel1;
+                        lock.notifyAll();
+                        break;
                     }
-                    slaves.remove(slave);
-                    hostAndPortListMap.remove(channels[index]);
-                    hostAndPortListMap.put(channel1, slaves);
-                    channels[index] = channel1;
-                    lock.notifyAll();
-                    break;
                 }
-            }
-            electionOnClose(channel1, index);
+                electionOnClose(channel1, index);
+            });
         });
     }
+
+
+    private Channel getChannelAndSetThread(String key) {
+        Channel channel = IS_POWER_OF_TWO ? channels[HashUtil.sumChar(key) & N] : channels[HashUtil.sumChar(key) % N];
+        if (channel == null) {
+            try {
+                this.wait();
+                channel = IS_POWER_OF_TWO ? channels[HashUtil.sumChar(key) & N] : channels[HashUtil.sumChar(key) % N];
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+        threadResultObj.setThread(Thread.currentThread());
+
+        return channel;
+    }
+
 
     @Override
     public String get(String key) {
@@ -484,9 +523,7 @@ public class CacheClusterClient implements Client {
     public List<String> getList(String key) throws CacheDataException {
         String result;
         synchronized (this) {
-
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("getList").setKey(key).build());
-
             LockSupport.park();
             result = threadResultObj.getResult();
         }
@@ -549,21 +586,6 @@ public class CacheClusterClient implements Client {
             expire(key, seconds);
         }
         return Long.parseLong(threadResultObj.getResult());
-    }
-
-    private Channel getChannelAndSetThread(String key) {
-        Channel channel = IS_POWER_OF_TWO ? channels[HashUtil.sumChar(key) & N] : channels[HashUtil.sumChar(key) % N];
-        if (channel == null) {
-            try {
-                this.wait();
-                channel = IS_POWER_OF_TWO ? channels[HashUtil.sumChar(key) & N] : channels[HashUtil.sumChar(key) % N];
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage(), e);
-            }
-        }
-        threadResultObj.setThread(Thread.currentThread());
-
-        return channel;
     }
 
     @Override
