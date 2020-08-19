@@ -42,18 +42,25 @@ public class CacheClusterClient implements Client {
 
     private static Bootstrap bootstrap = new Bootstrap();
 
+    /**和主节点断开连接，通过这个线程池里的线程找到新主*/
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("election"));
 
+    /**存这个客户端的线程和每次操作的结果*/
     private ClusterClientHandler.ThreadResultObj threadResultObj;
 
-    private Map<Channel, List<HostAndPort>> hostAndPortListMap = new HashMap<>();
+    /**存所有主节点和每个主节点下存的从节点*/
+    private Map<HostAndPort, List<HostAndPort>> hostAndPortListMap = new HashMap<>();
 
+    /**存所有主节点的连接*/
     private Channel[] channels;
 
+    /**主节点个数减一*/
     private final int N;
 
+    /**主节点个数是否为2的次方*/
     private final boolean IS_POWER_OF_TWO;
 
+    /**所有主节点的连接和这些主节点对应的线程结果。handler收到事件会查找这个容器来选择唤醒对应线程*/
     public static Map<Channel, ClusterClientHandler.ThreadResultObj> masterChannelThreadResultMap = new ConcurrentHashMap<>();
 
     static {
@@ -61,7 +68,6 @@ public class CacheClusterClient implements Client {
     }
 
     public static class HostAndPort {
-        public static final String LOCALHOST_STR = "localhost";
 
         private String host;
         private int port;
@@ -83,13 +89,8 @@ public class CacheClusterClient implements Client {
         public boolean equals(Object obj) {
             if (obj instanceof HostAndPort) {
                 HostAndPort hp = (HostAndPort) obj;
-
-                String thisHost = convertHost(host);
-                String hpHost = convertHost(hp.host);
-                return port == hp.port && thisHost.equals(hpHost);
-
+                return port == hp.port && host.equals(hp.host);
             }
-
             return false;
         }
 
@@ -98,16 +99,12 @@ public class CacheClusterClient implements Client {
             return host + ":" + port;
         }
 
-        private String convertHost(String host) {
-            if (host.equals("127.0.0.1")) {
-                return LOCALHOST_STR;
-            } else if (host.equals("::1")) {
-                return LOCALHOST_STR;
-            }
-
-            return host;
+        @Override
+        public int hashCode() {
+            return Objects.hash(host, port);
         }
     }
+
 
     public CacheClusterClient(List<HostAndPort> hostAndPorts) throws InterruptedException {
         threadResultObj = new ClusterClientHandler.ThreadResultObj(null,null);
@@ -126,8 +123,8 @@ public class CacheClusterClient implements Client {
             LockSupport.park();
             String result = threadResultObj.getResult();
             if ("yes".equals(result)) {
-                if (hostAndPortListMap.get(channel) == null) {
-                    hostAndPortListMap.put(channel, new ArrayList<>());
+                if (hostAndPortListMap.get(hostAndPort) == null) {
+                    hostAndPortListMap.put(hostAndPort, new ArrayList<>());
                     masters.add(channel);
                 }
             } else {
@@ -142,9 +139,9 @@ public class CacheClusterClient implements Client {
                             slaves = new ArrayList<>();
                             slaves.add(hostAndPort);
                             channel = bootstrap.connect(hostAndPort1.host, hostAndPort1.port).sync().channel();
-                            hostAndPortListMap.put(channel, slaves);
+                            hostAndPortListMap.put(hostAndPort1, slaves);
                             masters.add(channel);
-                            masterChannelThreadResultMap.put(channel,threadResultObj);
+                            masterChannelThreadResultMap.put(channel, threadResultObj);
                             checkedHostAndPorts.add(hostAndPort1);
                         } else {
                             slaves.add(hostAndPort);
@@ -163,7 +160,9 @@ public class CacheClusterClient implements Client {
     }
 
     private void electionOnClose(Channel channel, int index) {
-        List<HostAndPort> slaves = hostAndPortListMap.get(channel);
+        InetSocketAddress inetSocketAddress = (InetSocketAddress) channel.remoteAddress();
+        HostAndPort masterHostAndPort = new HostAndPort(inetSocketAddress.getHostString(),inetSocketAddress.getPort());
+        List<HostAndPort> slaves = hostAndPortListMap.get(masterHostAndPort);
         if (slaves.size() == 0) {
             return;
         }
@@ -180,6 +179,8 @@ public class CacheClusterClient implements Client {
                 //第三种情况就是正常情况，出现问题一般会在主从复制上面，如果从还没复制全就选举为主了，秒杀场景就会出现超卖现象。
                 //由于选举顺序是从节点加入顺序，并且从和从节点数据不一定完全一样的，所以当主挂了，选了个条数少的从，这个从升级为主服务了一段时间又挂了，再次选举另一个从，这样在秒杀场景还是会出现少卖现象。
                 threadResultObj.setResult("close");
+                hostAndPortListMap.remove(masterHostAndPort);
+                masterChannelThreadResultMap.remove(channels[index]);
                 channels[index] = null;
                 LockSupport.unpark(threadResultObj.getThread());
                 HostAndPort slave = slaves.get(0);
@@ -193,13 +194,14 @@ public class CacheClusterClient implements Client {
                             channel1.writeAndFlush(CommandDTO.Command.newBuilder().setType("getMaster").build());
                             LockSupport.park();
                             String result = threadResultObj.getResult();
+                            threadResultObj.setResult("close");
                             if (!"yes".equals(result)) {
                                 masterChannelThreadResultMap.remove(channel1);
                                 channel1.close().sync();
                                 String[] hostPort = result.split(":");
                                 int port = Integer.parseInt(hostPort[1]);
-                                InetSocketAddress inetSocketAddress = (InetSocketAddress) ((ChannelFuture) future).channel().remoteAddress();
-                                if (hostPort[0].equals(inetSocketAddress.getHostString()) && port == inetSocketAddress.getPort()) {
+                                InetSocketAddress inetSocketAddress1 = (InetSocketAddress) ((ChannelFuture) future).channel().remoteAddress();
+                                if (hostPort[0].equals(inetSocketAddress1.getHostString()) && port == inetSocketAddress1.getPort()) {
                                     Thread.sleep(1000);
                                     continue;
                                 }
@@ -211,8 +213,7 @@ public class CacheClusterClient implements Client {
                             logger.error(e.getMessage(), e);
                         }
                         slaves.remove(slave);
-                        hostAndPortListMap.remove(channels[index]);
-                        hostAndPortListMap.put(channel1, slaves);
+                        hostAndPortListMap.put(slave, slaves);
                         channels[index] = channel1;
                         lock.notifyAll();
                         break;
@@ -397,7 +398,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            put(key, value);
+            return put(key, value);
         }
         return threadResultObj.getResult();
     }
@@ -425,7 +426,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            zrange(key, start, end);
+            return zrange(key, start, end);
         }
         if ("e".equals(threadResultObj.getResult())) {
             throw new CacheDataException();
@@ -507,10 +508,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            getList(key);
-        }
-        if ("close".equals(result)) {
-            hget(key, field);
+            return hget(key, field);
         }
         if ("e".equals(result)) {
             throw new CacheDataException();
@@ -528,7 +526,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            getList(key);
+            return getList(key);
         }
         if ("e".equals(result)) {
             throw new CacheDataException();
@@ -546,7 +544,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            getSet(key);
+            return getSet(key);
         }
         if ("e".equals(result)) {
             throw new CacheDataException();
@@ -564,7 +562,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            scontain(key, element);
+            return scontain(key, element);
         }
         if ("e".equals(result)) {
             throw new CacheDataException();
@@ -583,7 +581,7 @@ public class CacheClusterClient implements Client {
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
-            expire(key, seconds);
+            return expire(key, seconds);
         }
         return Long.parseLong(threadResultObj.getResult());
     }
