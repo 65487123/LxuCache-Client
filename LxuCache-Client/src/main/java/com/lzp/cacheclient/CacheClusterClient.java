@@ -14,8 +14,6 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -159,13 +157,18 @@ public class CacheClusterClient implements Client {
         IS_POWER_OF_TWO = (channels.length & (N)) == 0;
     }
 
+
+
+    /**
+     * Description ：检测到主失连，找到新的主
+     **/
     private void electionOnClose(Channel channel, int index) {
         InetSocketAddress inetSocketAddress = (InetSocketAddress) channel.remoteAddress();
         HostAndPort masterHostAndPort = new HostAndPort(inetSocketAddress.getHostString(),inetSocketAddress.getPort());
         List<HostAndPort> slaves = hostAndPortListMap.get(masterHostAndPort);
-        if (slaves.size() == 0) {
+        /*if (slaves.size() == 0) {
             return;
-        }
+        }*/
         Object lock = this;
         channel.closeFuture().addListener(future -> {
             threadPool.execute(() -> {

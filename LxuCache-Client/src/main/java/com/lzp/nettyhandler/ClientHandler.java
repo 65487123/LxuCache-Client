@@ -1,5 +1,7 @@
 package com.lzp.nettyhandler;
 
+import com.lzp.cacheclient.ThreadFactoryImpl;
+import com.lzp.protocol.CommandDTO;
 import com.lzp.protocol.ResponseDTO;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,6 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
@@ -19,6 +24,12 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class ClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Response> {
     private static final Logger logger = LoggerFactory.getLogger(ClientHandler.class);
+
+    private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
+
+    static {
+        heartBeatThreadPool.execute(ClientHandler::hearBeat);
+    }
 
     public static class ThreadResultObj {
         private Thread thread;
@@ -61,7 +72,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Respo
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        channelResultMap.remove(channel);
+        ThreadResultObj threadResultObj = channelResultMap.remove(channel);
+        threadResultObj.setResult("close");
+        LockSupport.unpark(threadResultObj.getThread());
         logger.info(channel.id() + "与服务端断开连接");
     }
 
@@ -70,5 +83,22 @@ public class ClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Respo
         ThreadResultObj threadResultObj = channelResultMap.get(ctx.channel());
         threadResultObj.result = msg.getResult();
         LockSupport.unpark(threadResultObj.thread);
+    }
+
+
+    /**
+     * Description ：每四秒发送一个心跳包
+     **/
+    private static void hearBeat() {
+        while (true) {
+            for (Channel channel : channelResultMap.keySet()) {
+                channel.writeAndFlush(CommandDTO.Command.newBuilder().build());
+            }
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
     }
 }

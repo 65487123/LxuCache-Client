@@ -1,6 +1,7 @@
 
 import com.lzp.cacheclient.CacheClient;
 import com.lzp.cacheclient.CacheClusterClient;
+import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -102,8 +103,8 @@ public class Test {
             cacheClient.put(String.valueOf(i),String.valueOf(i));
         }
         System.out.println(Instant.now().toEpochMilli()-now);*/
-        /*CacheClient cacheClient = new CacheClient("127.0.0.1",8887);
-        cacheClient.put("1","2");
+        CacheClient cacheClient1 = new CacheClient("10.240.30.78",8888);
+        /*cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
         list.add("5");
@@ -143,20 +144,19 @@ public class Test {
         cacheClient.zadd("165555",8.98,"11");
         cacheClient.zadd("165555",0.98,"5");
         System.out.println(cacheClient.zrange("165555",0,4));*/
-        /*Jedis jedis = new Jedis("10.240.30.78",6379);
+        Jedis jedis = new Jedis("10.240.30.78",6379);
         jedis.zadd("104441",1.2,"2");
         jedis.zadd("104441",1.5,"24");
         jedis.zadd("104441",1.82,"22");
         jedis.zadd("104441",1.0,"23");
-        System.out.println(jedis.zrange("104441",0,3));*/
+        System.out.println(jedis.zrange("104441",0,3));
         //JedisCluster jedisCluster = new JedisCluster();
         List<CacheClusterClient.HostAndPort> hostAndPorts = new ArrayList<>();
-        //hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8887));
+        hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8887));
         hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8886));
         hostAndPorts.add(new CacheClusterClient.HostAndPort("10.240.30.78",8885));
-
         CacheClusterClient cacheClient = new CacheClusterClient(hostAndPorts);
-        /*cacheClient.put("1","2");
+        cacheClient.put("1","2");
         List<String> list = new ArrayList<>();
         list.add("3,");
         list.add("5");
@@ -170,7 +170,22 @@ public class Test {
         set.add("5");
         set.add("1");
         cacheClient.sadd("4",set);
-        System.out.println(cacheClient.get("1"));*/
+        long now = Instant.now().toEpochMilli();
+        for (int i=10000;i<45200;i++){
+            cacheClient.put(String.valueOf(i),String.valueOf(i));
+        }
+        System.out.println(Instant.now().toEpochMilli()-now);
+        now = Instant.now().toEpochMilli();
+        for (int i=10000;i<45200;i++){
+            jedis.set(String.valueOf(i),String.valueOf(i));
+        }
+        System.out.println(Instant.now().toEpochMilli()-now);
+        now = Instant.now().toEpochMilli();
+        for (int i=10000;i<45200;i++){
+            cacheClient1.put(String.valueOf(i),String.valueOf(i));
+        }
+        System.out.println(Instant.now().toEpochMilli()-now);
+        /*System.out.println(cacheClient.get("1"));
         System.out.println(cacheClient.getList("2"));
         System.out.println(cacheClient.hget("3","3"));
         System.out.println(cacheClient.hget("3","5"));
@@ -185,6 +200,7 @@ public class Test {
         System.out.println(cacheClient.get("3"));
         Thread.sleep(2010);
         System.out.println(cacheClient.get("3"));
-        long now = Instant.now().toEpochMilli();
+        long now = Instant.now().toEpochMilli();*/
+
     }
 }

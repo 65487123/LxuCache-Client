@@ -22,7 +22,7 @@ public interface Client extends AutoCloseable{
       * @param value 缓存的value
       * @Return 这个key原先对应的value 或者 null（如果原先没有这个key）
       **/
-    String put(String key, String value);
+    String put(String key, String value) throws InterruptedException;
 
     /**
      * Description ：得到key对应的value值
