@@ -1,7 +1,7 @@
 # LxuCache-Client
     
     
-    Self-developed java client of distributed cache middleware. Redis has basic functions
+    Self-developed java client of distributed cache middleware. 
 
 # 	How to use：
     1. Add maven dependency
@@ -19,10 +19,12 @@
 
      Cluster mode
      new CacheClusterClient(HostAndportList);
-     The parameter is all the master and slave nodes of the server, the client will automatically find all the master nodes and do the negative
-     Load balancing, the usage method is the same as the stand-alone mode, if the master hangs,
-     The client will automatically find the new master node. The user will not perceive it. Currently does not support runtime increase
-     Add a new master node or delete the original master node (you can add or delete slave nodes)
+     The parameter is all the master and slave nodes of the server, 
+     the client will automatically find all the master nodes and do the negative
+     Load balancing, the usage method is the same as the stand-alone mode, if 
+     the master hangs,The client will automatically find the new master node. 
+     The user will not perceive it. Currently does not support adding a new master 
+     node or deleting the original master node at runtime (you can add or delete slave nodes)
     
      3. Realize the connection pool yourself.
 
