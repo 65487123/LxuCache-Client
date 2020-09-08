@@ -1,6 +1,7 @@
 # LxuCache-Client
+    
+    
     Self-developed java client of distributed cache middleware. Redis has basic functions
-
 
 # 	How to use：
     1. Add maven dependency
@@ -27,7 +28,7 @@
 
 ________________________________________________________________________________________________________________________________________________________________________________
 
-# LxuCache-Client
+
     自研分布式缓存中间件的java客户端。redis有的功能，基本都有
 
 
