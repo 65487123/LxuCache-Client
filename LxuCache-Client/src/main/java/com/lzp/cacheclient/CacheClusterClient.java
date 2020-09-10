@@ -166,9 +166,9 @@ public class CacheClusterClient implements Client {
         InetSocketAddress inetSocketAddress = (InetSocketAddress) channel.remoteAddress();
         HostAndPort masterHostAndPort = new HostAndPort(inetSocketAddress.getHostString(),inetSocketAddress.getPort());
         List<HostAndPort> slaves = hostAndPortListMap.get(masterHostAndPort);
-        /*if (slaves.size() == 0) {
+        if (slaves.size() == 0) {
             return;
-        }*/
+        }
         Object lock = this;
         channel.closeFuture().addListener(future -> {
             threadPool.execute(() -> {
