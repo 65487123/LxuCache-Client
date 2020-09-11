@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix">
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +150,8 @@
       <workItem from="1597194239454" duration="14769000" />
       <workItem from="1597418923328" duration="20600000" />
       <workItem from="1597744306706" duration="38674000" />
-      <workItem from="1599724046887" duration="1028000" />
+      <workItem from="1599724046887" duration="3462000" />
+      <workItem from="1599790474169" duration="3059000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -195,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597820679150</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix">
+      <created>1599725124182</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1599725124182</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,10 +300,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593573886187" />
-    <state x="927" y="387" key="com.intellij.ide.util.TipDialog" timestamp="1593330464270">
+    <state x="927" y="387" key="com.intellij.ide.util.TipDialog" timestamp="1599794033881">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="927" y="387" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593330464270" />
+    <state x="927" y="387" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599794033881" />
     <state x="567" y="220" width="786" height="600" key="find.popup" timestamp="1597389237423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

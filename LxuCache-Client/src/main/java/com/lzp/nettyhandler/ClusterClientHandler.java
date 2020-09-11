@@ -15,7 +15,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
-import static com.lzp.cacheclient.CacheClusterClient.masterChannelThreadResultMap;
 
 /**
  * Description:
@@ -61,7 +60,7 @@ public class ClusterClientHandler extends SimpleChannelInboundHandler<ResponseDT
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ResponseDTO.Response msg) {
-        ThreadResultObj threadResultObj = masterChannelThreadResultMap.get(ctx.channel());
+        ThreadResultObj threadResultObj = CacheClusterClient.masterChannelThreadResultMap.get(ctx.channel());
         threadResultObj.result = msg.getResult();
         LockSupport.unpark(threadResultObj.thread);
     }
@@ -72,7 +71,7 @@ public class ClusterClientHandler extends SimpleChannelInboundHandler<ResponseDT
      **/
     private static void hearBeat() {
         while (true) {
-            for (Channel channel : masterChannelThreadResultMap.keySet()) {
+            for (Channel channel : CacheClusterClient.masterChannelThreadResultMap.keySet()) {
                 channel.writeAndFlush(CommandDTO.Command.newBuilder().build());
                 try {
                     Thread.sleep(4000);
