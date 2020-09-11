@@ -105,12 +105,12 @@ public class CacheClusterClient implements Client {
 
 
     public CacheClusterClient(List<HostAndPort> hostAndPorts) throws InterruptedException {
-        threadResultObj = new ClusterClientHandler.ThreadResultObj(null,null);
+        threadResultObj = new ClusterClientHandler.ThreadResultObj(null, null);
         Set<HostAndPort> checkedHostAndPorts = new HashSet<>();
         List<Channel> masters = new ArrayList<>();
         for (int i = hostAndPorts.size() - 1; i > -1; i--) {
             HostAndPort hostAndPort = hostAndPorts.get(i);
-            if (checkedHostAndPorts.contains(hostAndPort)){
+            if (checkedHostAndPorts.contains(hostAndPort)) {
                 continue;
             }
             Channel channel;
@@ -186,12 +186,19 @@ public class CacheClusterClient implements Client {
                 masterChannelThreadResultMap.remove(channels[index]);
                 channels[index] = null;
                 LockSupport.unpark(threadResultObj.getThread());
-                HostAndPort slave = slaves.get(0);
+                HostAndPort slave;
                 Channel channel1 = null;
                 synchronized (lock) {
-                    while (true) {
+                    for (int i = 0;; i++) {
+                        if (i == slaves.size()) {
+                            i = 0;
+                        }
+                        slave = slaves.get(i);
                         try {
-                            channel1 = bootstrap.connect(slave.host, slave.port).sync().channel();
+                            ChannelFuture connectFuture = bootstrap.connect(slave.host, slave.port);
+                            //如果超过一秒钟还没连上，这个从节点也当作挂了处理，换下个从节点连接(如果有的话)
+                            connectFuture.get(1,TimeUnit.SECONDS);
+                            channel1 = connectFuture.channel();
                             threadResultObj.setThread(Thread.currentThread());
                             masterChannelThreadResultMap.put(channel1, threadResultObj);
                             channel1.writeAndFlush(CommandDTO.Command.newBuilder().setType("getMaster").build());
@@ -214,8 +221,12 @@ public class CacheClusterClient implements Client {
                             }
                         } catch (InterruptedException e) {
                             logger.error(e.getMessage(), e);
+                        } catch (ExecutionException | TimeoutException e) {
+                            continue;
                         }
                         slaves.remove(slave);
+                        //把原来的主节点加入到从节点集合中(server端检测到主挂了，应该人工介入修复)
+                        slaves.add(masterHostAndPort);
                         hostAndPortListMap.put(slave, slaves);
                         channels[index] = channel1;
                         lock.notifyAll();

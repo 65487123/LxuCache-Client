@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
+    <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Test (1)">
-    <configuration name="CacheClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="CacheClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.lzp.cacheclient.CacheClient" />
       <module name="LxuCache-Client" />
       <extension name="coverage">
@@ -87,7 +88,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Test (1)" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test" />
       <module name="LxuCache-Client" />
       <method v="2">
@@ -122,8 +123,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test (1)" />
-        <item itemvalue="Application.CacheClient" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -151,7 +150,7 @@
       <workItem from="1597418923328" duration="20600000" />
       <workItem from="1597744306706" duration="38674000" />
       <workItem from="1599724046887" duration="3462000" />
-      <workItem from="1599790474169" duration="3059000" />
+      <workItem from="1599790474169" duration="17898000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -202,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599725124182</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix">
+      <created>1599795959119</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1599795959119</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,10 +226,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1592552481004" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597819567846">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599816420562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597819567846" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599816420562" />
     <state x="729" y="600" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593346199861">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -248,14 +254,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="208" y="401" width="1124" height="597" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597904044047" />
-    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1597828560134">
+    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1599811213191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597828560134" />
-    <state width="1023" height="466" key="DebuggerActiveHint" timestamp="1597917062505">
+    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599811213191" />
+    <state width="1023" height="466" key="DebuggerActiveHint" timestamp="1599820201565">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1023" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1597917062505" />
+    <state width="1023" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1599820201565" />
     <state x="-298" y="208" width="1736" height="856" key="DiffContextDialog" timestamp="1593507030779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -264,38 +270,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594262749387" />
-    <state width="1510" height="323" key="GridCell.Tab.0.bottom" timestamp="1597923708253">
+    <state width="1877" height="341" key="GridCell.Tab.0.bottom" timestamp="1599820214489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="323" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597923708253" />
-    <state width="1510" height="323" key="GridCell.Tab.0.center" timestamp="1597923708252">
+    <state width="1877" height="341" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599820214489" />
+    <state width="1877" height="341" key="GridCell.Tab.0.center" timestamp="1599820214489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="323" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597923708252" />
-    <state width="1510" height="323" key="GridCell.Tab.0.left" timestamp="1597923708252">
+    <state width="1877" height="341" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599820214489" />
+    <state width="1877" height="341" key="GridCell.Tab.0.left" timestamp="1599820214489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="323" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597923708252" />
-    <state width="1510" height="323" key="GridCell.Tab.0.right" timestamp="1597923708253">
+    <state width="1877" height="341" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599820214489" />
+    <state width="1877" height="341" key="GridCell.Tab.0.right" timestamp="1599820214489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="323" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597923708253" />
-    <state width="1510" height="295" key="GridCell.Tab.1.bottom" timestamp="1597917925493">
+    <state width="1877" height="341" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599820214489" />
+    <state width="1877" height="341" key="GridCell.Tab.1.bottom" timestamp="1599820159148">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="295" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597917925493" />
-    <state width="1510" height="295" key="GridCell.Tab.1.center" timestamp="1597917925493">
+    <state width="1877" height="341" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599820159147" />
+    <state width="1877" height="341" key="GridCell.Tab.1.center" timestamp="1599820159147">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="295" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597917925493" />
-    <state width="1510" height="295" key="GridCell.Tab.1.left" timestamp="1597917925493">
+    <state width="1877" height="341" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599820159147" />
+    <state width="1877" height="341" key="GridCell.Tab.1.left" timestamp="1599820159147">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="295" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597917925493" />
-    <state width="1510" height="295" key="GridCell.Tab.1.right" timestamp="1597917925493">
+    <state width="1877" height="341" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599820159147" />
+    <state width="1877" height="341" key="GridCell.Tab.1.right" timestamp="1599820159147">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1510" height="295" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597917925493" />
+    <state width="1877" height="341" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599820159147" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1593573886187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -337,18 +343,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java</url>
-          <line>512</line>
+          <line>523</line>
           <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Test.java</url>
-          <line>190</line>
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Test.java</url>
-          <line>189</line>
-          <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java</url>
@@ -372,18 +368,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Test.java</url>
-          <line>153</line>
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="82" />
+          <line>177</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>
         <breakpoint suspend="THREAD" type="java-line" />
       </breakpoints-defaults>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LxuCache_Client$Test__1_.ic" NAME="Test (1) Coverage Results" MODIFIED="1599817038202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
