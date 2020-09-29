@@ -8,7 +8,7 @@
      <dependency>
          <groupId>com.lzp.lxucache</groupId>
          <artifactId>lxuCache-client</artifactId>
-         <version>1.0-SNAPSHOT</version>
+         <version>1.x.x</version>
      </dependency>
 
 
@@ -28,8 +28,12 @@
     
      3. Realize the connection pool yourself.
 
-________________________________________________________________________________________________________________________________________________________________________________
+## Major changes in the new version
 
+    1.0.1：Originally the return value was a Response object, which was serialized using protobuf. Version 1.0.1 changed the return value 
+    to a single string, canceling protobuf serialization.
+ __________________________________________________________________________________________________________________________________________________________________
+                          
 
     自研分布式缓存中间件的java客户端。redis有的功能，基本都有
 
@@ -54,3 +58,6 @@ ________________________________________________________________________________
     客户端会自动找到新的主节点。用户不会感知。目前不支持运行时增加新的主节点或删除原有主节点（可以增删从节点)
     
     3、自己实现连接池。
+    
+## 新版本主要改动
+    1.0.1：原先返回值是一个Respnse对象，用的protobuf序列化，1.0.1版本把返回值改为单个字符串，取消protobuf序列化。
