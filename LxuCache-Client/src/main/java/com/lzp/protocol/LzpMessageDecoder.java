@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class LzpMessageDecoder extends ReplayingDecoder<Void> {
@@ -21,7 +22,7 @@ public class LzpMessageDecoder extends ReplayingDecoder<Void> {
         int length = byteBuf.readInt();
         byte[] content = new byte[length];
         byteBuf.readBytes(content);
-        list.add(content);
+        list.add(new String(content, StandardCharsets.UTF_8));
     }
 
     @Override

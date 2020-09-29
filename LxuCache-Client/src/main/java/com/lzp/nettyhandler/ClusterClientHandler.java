@@ -3,7 +3,6 @@ package com.lzp.nettyhandler;
 import com.lzp.cacheclient.CacheClusterClient;
 import com.lzp.cacheclient.ThreadFactoryImpl;
 import com.lzp.protocol.CommandDTO;
-import com.lzp.protocol.ResponseDTO;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -22,7 +21,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author: Lu ZePing
  * @date: 2020/7/1 12:59
  */
-public class ClusterClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Response> {
+public class ClusterClientHandler extends SimpleChannelInboundHandler<String> {
     private static final Logger logger = LoggerFactory.getLogger(ClusterClientHandler.class);
 
     private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
@@ -59,9 +58,9 @@ public class ClusterClientHandler extends SimpleChannelInboundHandler<ResponseDT
 
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, ResponseDTO.Response msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) {
         ThreadResultObj threadResultObj = CacheClusterClient.masterChannelThreadResultMap.get(ctx.channel());
-        threadResultObj.result = msg.getResult();
+        threadResultObj.result = msg;
         LockSupport.unpark(threadResultObj.thread);
     }
 

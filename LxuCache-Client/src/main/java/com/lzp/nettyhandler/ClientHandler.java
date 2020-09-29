@@ -2,7 +2,6 @@ package com.lzp.nettyhandler;
 
 import com.lzp.cacheclient.ThreadFactoryImpl;
 import com.lzp.protocol.CommandDTO;
-import com.lzp.protocol.ResponseDTO;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -22,7 +21,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author: Lu ZePing
  * @date: 2020/7/1 12:59
  */
-public class ClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Response> {
+public class ClientHandler extends SimpleChannelInboundHandler<String> {
     private static final Logger logger = LoggerFactory.getLogger(ClientHandler.class);
 
     private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
@@ -79,9 +78,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<ResponseDTO.Respo
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, ResponseDTO.Response msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         ThreadResultObj threadResultObj = channelResultMap.get(ctx.channel());
-        threadResultObj.result = msg.getResult();
+        threadResultObj.result = msg;
         LockSupport.unpark(threadResultObj.thread);
     }
 
