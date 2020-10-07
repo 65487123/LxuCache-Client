@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +151,7 @@
       <workItem from="1599724046887" duration="3462000" />
       <workItem from="1599790474169" duration="17898000" />
       <workItem from="1601367351552" duration="3051000" />
-      <workItem from="1602058526594" duration="756000" />
+      <workItem from="1602058526594" duration="8364000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -215,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601367675665</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix 注释">
+      <created>1602060365972</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1602060365972</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,17 +245,14 @@
     <MESSAGE value="fix 简化客户端" />
     <MESSAGE value="fix" />
     <MESSAGE value="修改版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改版本" />
+    <MESSAGE value="fix 注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix 注释" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599816420562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599816420562" />
-    <state x="729" y="600" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593346199861">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="729" y="600" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593346199861" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1597908131536">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -268,9 +273,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="208" y="401" width="1124" height="597" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597904044047" />
-    <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1599811213191">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="335" y="8" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1602084436511">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="335" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602084436511" />
     <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599811213191" />
     <state width="1023" height="466" key="DebuggerActiveHint" timestamp="1599820201565">
       <screen x="0" y="0" width="1920" height="1040" />

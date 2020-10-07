@@ -606,6 +606,7 @@ public class CacheClusterClient implements Client {
             channels[i].close().sync();
             masterChannelThreadResultMap.remove(channels[i]);
         }
+        eventExecutors.shutdownGracefully();
     }
 }
 
