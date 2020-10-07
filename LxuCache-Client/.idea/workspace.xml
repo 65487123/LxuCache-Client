@@ -3,16 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClientInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClientInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +53,10 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\model" />
+      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src" />
       <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\protocol" />
-      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main\resources" />
-      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main" />
-      <recent name="E:\LxuCache-Client\src\main\java\com\lzp\cacheclient" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.lzp.cacheclient" />
@@ -76,10 +65,11 @@
       <recent name="" />
       <recent name="com.lzp.protocol" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\model" />
-      <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\project\新建文件夹\LxuCache-Client\LxuCache-Client\src\main\java\com\lzp\protocol" />
+      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main\resources" />
+      <recent name="D:\pro\LxuCache-Client\LxuCache-Client\src\main" />
+      <recent name="E:\LxuCache-Client\src\main\java\com\lzp\cacheclient" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Test (1)">
@@ -160,6 +150,7 @@
       <workItem from="1599724046887" duration="3462000" />
       <workItem from="1599790474169" duration="17898000" />
       <workItem from="1601367351552" duration="3051000" />
+      <workItem from="1602058526594" duration="756000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>

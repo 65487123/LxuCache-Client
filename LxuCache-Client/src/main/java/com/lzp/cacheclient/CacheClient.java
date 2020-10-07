@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
- * Description:单机客户端功能基本完整，但是高并发情况下可能会出现，server挂了一直阻塞情况，不过这种情况
- 概率也很低，暂时就修复了。而且单机实际用处不大，用集群就行了。
+ * Description:单机客户端功能基本完整，但是可能会出现server挂了一直阻塞情况，不过这种情况
+ 概率也很低，暂时就不修复了。而且单机实际用处不大，用集群就行了。
  *
  * @author: Lu ZePing
  * @date: 2020/7/1 12:57
