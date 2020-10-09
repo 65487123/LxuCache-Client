@@ -1,6 +1,7 @@
 # LxuCache-Client
     
-    
+中文|[English](https://github.com/65487123/LxuCache-Client/blob/master/README-EN.md)
+
     Self-developed java client of distributed cache middleware. 
 
 # 	How to use：
@@ -34,6 +35,7 @@
     to a single string, canceling protobuf serialization.
  __________________________________________________________________________________________________________________________________________________________________
                           
+[中文](https://github.com/65487123/LxuCache-Client/blob/master/README.md)|English 
 
     自研分布式缓存中间件的java客户端。redis有的功能，基本都有
 
