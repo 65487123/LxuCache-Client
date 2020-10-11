@@ -23,7 +23,6 @@ import java.util.concurrent.*;
 import java.util.concurrent.locks.LockSupport;
 
 
-
 /**
  * Description:集群版客户端
  *
@@ -40,25 +39,39 @@ public class CacheClusterClient implements Client {
 
     private static Bootstrap bootstrap = new Bootstrap();
 
-    /**和主节点断开连接，通过这个线程池里的线程找到新主*/
+    /**
+     * 和主节点断开连接，通过这个线程池里的线程找到新主
+     */
     private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("election"));
 
-    /**存这个客户端的线程和每次操作的结果*/
+    /**
+     * 存这个客户端的线程和每次操作的结果
+     */
     private ClusterClientHandler.ThreadResultObj threadResultObj;
 
-    /**存所有主节点和每个主节点下存的从节点*/
+    /**
+     * 存所有主节点和每个主节点下存的从节点
+     */
     private Map<HostAndPort, List<HostAndPort>> hostAndPortListMap = new HashMap<>();
 
-    /**存所有主节点的连接*/
+    /**
+     * 存所有主节点的连接
+     */
     private Channel[] channels;
 
-    /**主节点个数减一*/
+    /**
+     * 主节点个数减一
+     */
     private final int N;
 
-    /**主节点个数是否为2的次方*/
+    /**
+     * 主节点个数是否为2的次方
+     */
     private final boolean IS_POWER_OF_TWO;
 
-    /**所有主节点的连接和这些主节点对应的线程结果。handler收到事件会查找这个容器来选择唤醒对应线程*/
+    /**
+     * 所有主节点的连接和这些主节点对应的线程结果。handler收到事件会查找这个容器来选择唤醒对应线程
+     */
     public static Map<Channel, ClusterClientHandler.ThreadResultObj> masterChannelThreadResultMap = new ConcurrentHashMap<>();
 
     static {
@@ -115,7 +128,7 @@ public class CacheClusterClient implements Client {
             }
             Channel channel;
             channel = bootstrap.connect(hostAndPort.host, hostAndPort.port).sync().channel();
-            masterChannelThreadResultMap.put(channel,threadResultObj);
+            masterChannelThreadResultMap.put(channel, threadResultObj);
             threadResultObj.setThread(Thread.currentThread());
             channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("getMaster").build());
             LockSupport.park();
@@ -158,13 +171,12 @@ public class CacheClusterClient implements Client {
     }
 
 
-
     /**
      * Description ：检测到主失连，找到新的主
      **/
     private void electionOnClose(Channel channel, int index) {
         InetSocketAddress inetSocketAddress = (InetSocketAddress) channel.remoteAddress();
-        HostAndPort masterHostAndPort = new HostAndPort(inetSocketAddress.getHostString(),inetSocketAddress.getPort());
+        HostAndPort masterHostAndPort = new HostAndPort(inetSocketAddress.getHostString(), inetSocketAddress.getPort());
         List<HostAndPort> slaves = hostAndPortListMap.get(masterHostAndPort);
         if (slaves.size() == 0) {
             return;
@@ -189,7 +201,7 @@ public class CacheClusterClient implements Client {
                 HostAndPort slave;
                 Channel channel1 = null;
                 synchronized (lock) {
-                    for (int i = 0;; i++) {
+                    for (int i = 0; ; i++) {
                         if (i == slaves.size()) {
                             i = 0;
                         }
@@ -197,7 +209,7 @@ public class CacheClusterClient implements Client {
                         try {
                             ChannelFuture connectFuture = bootstrap.connect(slave.host, slave.port);
                             //如果超过一秒钟还没连上，这个从节点也当作挂了处理，换下个从节点连接(如果有的话)
-                            connectFuture.get(1,TimeUnit.SECONDS);
+                            connectFuture.get(1, TimeUnit.SECONDS);
                             channel1 = connectFuture.channel();
                             threadResultObj.setThread(Thread.currentThread());
                             masterChannelThreadResultMap.put(channel1, threadResultObj);
@@ -249,7 +261,8 @@ public class CacheClusterClient implements Client {
                 logger.error(e.getMessage(), e);
             }
         }
-        threadResultObj.setThread(Thread.currentThread());
+        threadResultObj.setThread(Thread.currentThread()).setResult(null);
+        ;
 
         return channel;
     }
@@ -260,7 +273,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("get").setKey(key).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -275,7 +290,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("incr").setKey(key).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -293,7 +310,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("decr").setKey(key).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -311,7 +330,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("hput").setKey(key).setValue(SerialUtil.mapToString(map)).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -327,7 +348,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("hmerge").setKey(key).setValue(SerialUtil.mapToString(map)).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -343,7 +366,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("lpush").setKey(key).setValue(SerialUtil.collectionToString(list)).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -360,7 +385,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("sadd").setKey(key).setValue(SerialUtil.collectionToString(set)).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -376,7 +403,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("zadd").setKey(key).setValue(SerialUtil.mapWithDouToString(zset)).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -392,7 +421,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("zadd").setKey(key).setValue(score + "©" + member).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -408,7 +439,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("put").setKey(key).setValue(value).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -423,7 +456,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("remove").setKey(key).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -436,7 +471,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("zrange").setKey(key).setValue(start + "©" + end).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -499,8 +536,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("hset").setKey(key).setValue(member + "©" + value).build());
-
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -517,8 +555,9 @@ public class CacheClusterClient implements Client {
         synchronized (this) {
 
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("hget").setKey(key).setValue(field).build());
-
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -536,7 +575,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("getList").setKey(key).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -554,7 +595,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("getSet").setKey(key).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -572,7 +615,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("scontain").setKey(key).setValue(element).build());
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {
@@ -590,8 +635,9 @@ public class CacheClusterClient implements Client {
         String result;
         synchronized (this) {
             getChannelAndSetThread(key).writeAndFlush(CommandDTO.Command.newBuilder().setType("expire").setKey(key).setValue(String.valueOf(seconds)).build());
-
-            LockSupport.park();
+            while (threadResultObj.getResult() == null) {
+                LockSupport.park();
+            }
             result = threadResultObj.getResult();
         }
         if ("close".equals(result)) {

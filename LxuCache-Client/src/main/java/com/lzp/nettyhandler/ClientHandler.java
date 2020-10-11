@@ -39,12 +39,14 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
             this.result = result;
         }
 
-        public void setThread(Thread thread) {
+        public ThreadResultObj setThread(Thread thread) {
             this.thread = thread;
+            return this;
         }
 
-        public void setResult(String result) {
+        public ThreadResultObj setResult(String result) {
             this.result = result;
+            return this;
         }
 
         public Thread getThread() {
