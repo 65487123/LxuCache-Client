@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClusterClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyhandler/ClusterClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +151,7 @@
       <workItem from="1599790474169" duration="17898000" />
       <workItem from="1601367351552" duration="3051000" />
       <workItem from="1602058526594" duration="9312000" />
-      <workItem from="1602392277970" duration="2850000" />
+      <workItem from="1602392277970" duration="3350000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -241,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602404849259</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix spurious wakeup">
+      <created>1602406343976</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1602406343976</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +267,8 @@
     <MESSAGE value="修改版本" />
     <MESSAGE value="fix 注释" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="fix spurious wakeup" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix spurious wakeup" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599816420562">
