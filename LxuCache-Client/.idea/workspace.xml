@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cdf2b6bf-d0ad-4d6a-9a34-9a165208bea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cacheclient/CacheClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +150,8 @@
       <workItem from="1599724046887" duration="3462000" />
       <workItem from="1599790474169" duration="17898000" />
       <workItem from="1601367351552" duration="3051000" />
-      <workItem from="1602058526594" duration="8364000" />
+      <workItem from="1602058526594" duration="9312000" />
+      <workItem from="1602392277970" duration="1317000" />
     </task>
     <task id="LOCAL-00001" summary="fix 修改序列化反序列化协议">
       <created>1593513519838</created>
@@ -223,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602060365972</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix">
+      <created>1602084508921</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1602084508921</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,10 +250,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fix 修改序列化反序列化协议" />
     <MESSAGE value="fix 简化客户端" />
-    <MESSAGE value="fix" />
     <MESSAGE value="修改版本" />
     <MESSAGE value="fix 注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix 注释" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599816420562">
@@ -257,14 +264,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1597908131536" />
-    <state x="529" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593513474908">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="529" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593513474908" />
-    <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593579417270">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593579417270" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601367926019">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -273,10 +272,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="208" y="401" width="1124" height="597" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597904044047" />
-    <state x="335" y="8" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1602084436511">
+    <state x="335" y="8" width="1297" height="943" key="CommitChangelistDialog2" timestamp="1602404847267">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="335" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602084436511" />
+    <state x="335" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1602404847267" />
     <state x="419" y="50" width="1297" height="943" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599811213191" />
     <state width="1023" height="466" key="DebuggerActiveHint" timestamp="1599820201565">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -322,25 +321,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="341" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599820159147" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1593573886187">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="742" y="307" key="com.intellij.ide.util.TipDialog" timestamp="1602404003401">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593573886187" />
-    <state x="927" y="387" key="com.intellij.ide.util.TipDialog" timestamp="1599794033881">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
+    <state x="742" y="307" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1602404003401" />
     <state x="927" y="387" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599794033881" />
     <state x="567" y="220" width="786" height="600" key="find.popup" timestamp="1597389237423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="567" y="220" width="786" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597389237423" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1593505485114">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1602404644049">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593505485114" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597815960397">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602404644049" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597815960397" />
   </component>
   <component name="XDebuggerManager">

@@ -241,7 +241,7 @@ public class CacheClusterClient implements Client {
 
     private Channel getChannelAndSetThread(String key) {
         Channel channel = IS_POWER_OF_TWO ? channels[HashUtil.sumChar(key) & N] : channels[HashUtil.sumChar(key) % N];
-        if (channel == null) {
+        while (channel == null) {
             try {
                 this.wait();
                 channel = IS_POWER_OF_TWO ? channels[HashUtil.sumChar(key) & N] : channels[HashUtil.sumChar(key) % N];
