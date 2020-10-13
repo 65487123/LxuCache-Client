@@ -33,4 +33,4 @@
 
     1.0.1：Originally the return value was a Response object, which was serialized using protobuf. Version 1.0.1 changed the return value 
     to a single string, canceling protobuf serialization.
-    1.0.2：Fix spurious wakeup 
+    1.0.1-sr1：Fix spurious wakeup and rewrite the hashCode() method of HostAndPort to improve performance
