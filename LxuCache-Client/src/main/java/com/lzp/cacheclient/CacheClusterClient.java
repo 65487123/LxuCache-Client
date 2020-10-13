@@ -112,7 +112,7 @@ public class CacheClusterClient implements Client {
 
         @Override
         public int hashCode() {
-            return Objects.hash(host, port);
+            return host.hashCode() + port;
         }
     }
 
