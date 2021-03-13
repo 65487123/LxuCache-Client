@@ -15,18 +15,28 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class LzpMessageDecoder extends ReplayingDecoder<Void> {
-    private static final Logger logger = LoggerFactory.getLogger(LzpMessageDecoder.class);
+    private boolean isServer;
 
-    @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        int length = byteBuf.readInt();
-        byte[] content = new byte[length];
-        byteBuf.readBytes(content);
-        list.add(new String(content, StandardCharsets.UTF_8));
+    public LzpMessageDecoder(boolean isServer) {
+        this.isServer = isServer;
     }
 
     @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt)  {
+    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) {
+        int length = byteBuf.readInt();
+        if (length == 0) {
+            if (isServer) {
+                channelHandlerContext.channel().writeAndFlush(new byte[0]);
+            }
+            return;
+        }
+        byte[] content = new byte[length];
+        byteBuf.readBytes(content);
+        list.add(content);
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
         if (evt instanceof IdleStateEvent) {
             ctx.channel().close();
         }
