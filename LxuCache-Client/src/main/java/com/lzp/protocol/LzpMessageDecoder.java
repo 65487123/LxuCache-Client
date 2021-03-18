@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class LzpMessageDecoder extends ReplayingDecoder<Void> {
-    private boolean isServer;
+    private final boolean isServer;
 
     public LzpMessageDecoder(boolean isServer) {
         this.isServer = isServer;
