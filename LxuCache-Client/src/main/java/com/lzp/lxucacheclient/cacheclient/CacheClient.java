@@ -1,27 +1,22 @@
-package com.lzp.cacheclient;
+package com.lzp.lxucacheclient.cacheclient;
 
-import com.lzp.exception.CacheDataException;
-import com.lzp.exception.ChannelClosedException;
-import com.lzp.nettyhandler.ClientHandler;
-import com.lzp.nettyhandler.ClientInitializer;
-import com.lzp.protocol.CommandDTO;
-import com.lzp.util.SerialUtil;
+import com.lzp.lxucacheclient.exception.CacheDataException;
+import com.lzp.lxucacheclient.exception.ChannelClosedException;
+import com.lzp.lxucacheclient.nettyhandler.ClientHandler;
+import com.lzp.lxucacheclient.nettyhandler.ClientInitializer;
+import com.lzp.lxucacheclient.protocol.CommandDTO;
+import com.lzp.lxucacheclient.util.SerialUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**

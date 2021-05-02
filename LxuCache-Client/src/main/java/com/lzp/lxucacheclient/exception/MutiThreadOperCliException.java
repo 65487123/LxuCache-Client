@@ -1,4 +1,4 @@
-package com.lzp.exception;
+package com.lzp.lxucacheclient.exception;
 
 /**
  * Description:多线程操作一个缓存客户端就会报错

@@ -1,4 +1,4 @@
-package com.lzp.util;
+package com.lzp.lxucacheclient.util;
 
 /**
  * Description:工具类

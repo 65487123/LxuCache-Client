@@ -1,4 +1,4 @@
-package com.lzp.protocol;
+package com.lzp.lxucacheclient.protocol;
 
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;

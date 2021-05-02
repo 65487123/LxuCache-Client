@@ -1,4 +1,4 @@
-package com.lzp.util;
+package com.lzp.lxucacheclient.util;
 
 import java.util.*;
 

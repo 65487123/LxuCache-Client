@@ -1,4 +1,4 @@
-package com.lzp.cacheclient;
+package com.lzp.lxucacheclient.cacheclient;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

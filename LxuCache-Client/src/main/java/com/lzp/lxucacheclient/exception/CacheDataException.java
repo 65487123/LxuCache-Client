@@ -1,4 +1,4 @@
-package com.lzp.exception;
+package com.lzp.lxucacheclient.exception;
 
 /**
  * Description:缓存数据错误异常

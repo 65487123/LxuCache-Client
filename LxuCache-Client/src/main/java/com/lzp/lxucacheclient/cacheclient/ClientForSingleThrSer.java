@@ -1,4 +1,4 @@
-package com.lzp.cacheclient;
+package com.lzp.lxucacheclient.cacheclient;
 
 import java.util.List;
 import java.util.Map;

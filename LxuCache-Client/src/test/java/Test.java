@@ -1,7 +1,5 @@
 
-import com.lzp.cacheclient.CacheClient;
-import com.lzp.cacheclient.CacheClusterClient;
-import redis.clients.jedis.Jedis;
+import com.lzp.lxucacheclient.cacheclient.CacheClusterClient;
 
 import java.io.IOException;
 import java.time.Instant;

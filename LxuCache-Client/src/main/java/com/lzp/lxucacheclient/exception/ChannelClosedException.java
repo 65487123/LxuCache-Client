@@ -1,4 +1,4 @@
-package com.lzp.exception;
+package com.lzp.lxucacheclient.exception;
 
 /**
  * Description:

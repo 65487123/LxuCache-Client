@@ -1,4 +1,4 @@
-package com.lzp.protocol;
+package com.lzp.lxucacheclient.protocol;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

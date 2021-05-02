@@ -1,11 +1,10 @@
-package com.lzp.cacheclient;
+package com.lzp.lxucacheclient.cacheclient;
 
-import com.lzp.exception.CacheDataException;
+import com.lzp.lxucacheclient.exception.CacheDataException;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.zip.DataFormatException;
 
 /**
  * Description:这个缓存和redis类似，是key-value结构， key只能是String类型，value主要有五种类型：
