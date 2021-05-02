@@ -21,7 +21,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author: Lu ZePing
  * @date: 2020/7/1 12:59
  */
-public class ClientHandler extends SimpleChannelInboundHandler<String> {
+public class ClientHandler extends SimpleChannelInboundHandler<byte[]> {
     private static final Logger logger = LoggerFactory.getLogger(ClientHandler.class);
 
     private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
@@ -80,9 +80,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, byte[] msg) throws Exception {
         ThreadResultObj threadResultObj = channelResultMap.get(ctx.channel());
-        threadResultObj.result = msg;
+        threadResultObj.result = new String(msg);
         LockSupport.unpark(threadResultObj.thread);
     }
 

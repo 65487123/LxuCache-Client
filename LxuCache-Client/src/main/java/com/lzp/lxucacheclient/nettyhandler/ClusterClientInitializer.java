@@ -3,7 +3,6 @@ package com.lzp.lxucacheclient.nettyhandler;
 import com.lzp.lxucacheclient.protocol.LzpMessageDecoder;
 import com.lzp.lxucacheclient.protocol.LzpMessageEncoder;
 import com.lzp.lxucacheclient.protocol.LzpProtobufEncoder;
-import com.lzp.protocol.*;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.handler.timeout.IdleStateHandler;

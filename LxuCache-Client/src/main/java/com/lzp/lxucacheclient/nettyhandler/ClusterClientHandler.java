@@ -21,7 +21,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author: Lu ZePing
  * @date: 2020/7/1 12:59
  */
-public class ClusterClientHandler extends SimpleChannelInboundHandler<String> {
+public class ClusterClientHandler extends SimpleChannelInboundHandler<byte[]> {
     private static final Logger logger = LoggerFactory.getLogger(ClusterClientHandler.class);
 
     private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
@@ -60,9 +60,9 @@ public class ClusterClientHandler extends SimpleChannelInboundHandler<String> {
 
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, byte[] msg) {
         ThreadResultObj threadResultObj = CacheClusterClient.masterChannelThreadResultMap.get(ctx.channel());
-        threadResultObj.result = msg;
+        threadResultObj.result = new String(msg);
         LockSupport.unpark(threadResultObj.thread);
     }
 

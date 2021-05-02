@@ -1,4 +1,5 @@
 
+import com.lzp.lxucacheclient.cacheclient.CacheClient;
 import com.lzp.lxucacheclient.cacheclient.CacheClusterClient;
 
 import java.io.IOException;
@@ -150,7 +151,7 @@ public class Test {
         System.out.println(jedis.zrange("104441",0,3));*/
         //JedisCluster jedisCluster = new JedisCluster();
         List<CacheClusterClient.HostAndPort> hostAndPorts = new ArrayList<>();
-        //hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8887));
+        hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8887));
         hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8886));
         hostAndPorts.add(new CacheClusterClient.HostAndPort("127.0.0.1",8885));
         CacheClusterClient cacheClient = new CacheClusterClient(hostAndPorts);
